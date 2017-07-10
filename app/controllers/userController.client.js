@@ -2,9 +2,11 @@
 
 (function () {
 
+   var photoId = document.querySelector('#photoId') || null;
+   var repo = document.querySelector('#repo') || null;
    var profileId = document.querySelector('#profile-id') || null;
    var profileUsername = document.querySelector('#profile-username') || null;
-   var profileRepos = document.querySelector('#profile-repos') || null;
+   //var profileRepos = document.querySelector('#profile-repos') || null;
    var displayName = document.querySelector('#display-name');
    var apiUrl = appUrl + '/api/:id';
 
@@ -29,9 +31,23 @@
          updateHtmlElement(userObject, profileUsername, 'username');   
       }
 
-      if (profileRepos !== null) {
-         updateHtmlElement(userObject, profileRepos, 'publicRepos');   
+      if(userObject.publicRepos !== undefined){
+         if (userObject.publicRepos !== null) {
+            repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">'+ userObject.publicRepos +'</span></p>';
+            //updateHtmlElement(userObject, profileRepos, 'publicRepos'); 
+         }
+      }else{
+         repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">No Info!</span></p>'; 
       }
+      
+      if(userObject.photo !== undefined){
+         if (userObject.photo !== null && photoId !== null) {
+            photoId.innerHTML =  '<img src='+userObject.photo+' class = "img-rounded">';
+         }
+      } else {
+         photoId.innerHTML =  '<img src="/public/img/gh-mark-32px.png" alt="github logo" />';
+      }
+      
 
    }));
 })();
