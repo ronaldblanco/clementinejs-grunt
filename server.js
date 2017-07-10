@@ -30,6 +30,26 @@ app.use(passport.session());
 
 routes(app, passport, passportTwitter);
 
+//Uncomment to used the Websocket Controller
+//using: socket.io http and model config.js as test
+//WEBSOCKET///////////////////////////
+/*var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
+
+var numClients = 0;
+var endpoint = io
+  .of('/')
+  .on('connection', function (socket) {
+      webSocketHandler.respond(endpoint,socket);
+  });
+  
+  var port = process.env.PORT || 8080;
+  server.listen(port,  function () {
+	console.log('Node.js with WebSocket listening on port ' + port + '...');
+});*/
+//WEBSOCKET//////////////////////////
+
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
