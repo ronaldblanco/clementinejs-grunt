@@ -38,11 +38,11 @@ module.exports = function (passportTwitter) {
 				} else {
 					var newUser = new User();
 
-					newUser.github.id = profile.id;
-					newUser.github.username = profile.username;
-					newUser.github.displayName = profile.displayName;
+					newUser.login.id = profile.id;
+					newUser.login.username = profile.username;
+					newUser.login.displayName = profile.displayName;
 					//newUser.github.publicRepos = 0;
-					newUser.github.photo = profile.photos[0].value;
+					newUser.login.photo = profile.photos[0].value;
 					//newUser.nbrClicks.clicks = 0;
 					//newUser.geolocation.city = '';
 					//newUser.geolocation.state = '';

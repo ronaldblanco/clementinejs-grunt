@@ -12,6 +12,10 @@ module.exports = function (app, passport, passportTwitter) {
 			res.redirect('/login');
 		}
 	}
+	
+	function isNotLoggedIn (req, res, next) {
+			return next();
+	}
 
 	var clickHandler = new ClickHandler();
 
@@ -38,7 +42,7 @@ module.exports = function (app, passport, passportTwitter) {
 
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
+			res.json(req.user.login);
 		});
 
 	app.route('/auth/github')
