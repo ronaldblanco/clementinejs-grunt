@@ -4,11 +4,13 @@ var express = require('express');
 var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var passportTwitter = require('passport');
 var session = require('express-session');
 
 var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
+require('./app/config/passport-twitter')(passportTwitter);
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
@@ -26,7 +28,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport);
+routes(app, passport, passportTwitter);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

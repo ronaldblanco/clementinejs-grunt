@@ -3,7 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, passportTwitter) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -46,6 +46,15 @@ module.exports = function (app, passport) {
 
 	app.route('/auth/github/callback')
 		.get(passport.authenticate('github', {
+			successRedirect: '/',
+			failureRedirect: '/login'
+		}));
+		
+	app.route('/auth/twitter')
+		.get(passportTwitter.authenticate('twitter'));
+
+	app.route('/auth/twitter/callback')
+		.get(passportTwitter.authenticate('twitter', {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
