@@ -4,15 +4,15 @@
 
 ## Overview
 
-The pnald version is a personilised version of Clementine.js FCC with a couple improvements:
-Added Jquery
-Added Bootstrap
-Added w3.css responsive
-Added a controller for web socket use with socket.io
-Added head.html and foot.html to do more easy the html customization
-Added urlparser
-Added TWITTER passport Autentication
-Added a samply of array manipulation inside mongodb
+The pnald version is a personilised version of Clementine.js FCC with a couple improvements:<br>
+Added Jquery<br>
+Added Bootstrap<br>
+Added w3.css responsive<br>
+Added a controller for web socket use with socket.io<br>
+Added head.html and foot.html to do more easy the html customization<br>
+Added urlparser<br>
+Added TWITTER passport Autentication<br>
+Added a samply of array manipulation inside mongodb<br>
 
 Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
 
