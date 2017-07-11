@@ -31,20 +31,20 @@
          updateHtmlElement(userObject, profileUsername, 'username');   
       }
 
-      if(userObject.publicRepos !== undefined){
+      if(userObject.publicRepos !== undefined && repo !== null){
          if (userObject.publicRepos !== null) {
             repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">'+ userObject.publicRepos +'</span></p>';
             //updateHtmlElement(userObject, profileRepos, 'publicRepos'); 
          }
-      }else{
+      }else if(userObject.publicRepos === undefined && repo !== null){
          repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">No Info!</span></p>'; 
       }
       
-      if(userObject.photo !== undefined){
+      if(userObject.photo !== undefined && photoId !== null){
          if (userObject.photo !== null && photoId !== null) {
             photoId.innerHTML =  '<img src='+userObject.photo+' class = "img-rounded">';
          }
-      } else {
+      } else if(userObject.photo === undefined && photoId !== null) {
          photoId.innerHTML =  '<img src="/public/img/gh-mark-32px.png" alt="github logo" />';
       }
       
