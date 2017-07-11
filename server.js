@@ -28,6 +28,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Forzing Cache of static//////////////
+app.use(function (req, res, next) {
+    if (req.url.match(/^\/(css|js|img|font)\/.+/)) {
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+    next();
+});
+//////////////////////////////////////
+
 routes(app, passport, passportTwitter);
 
 //Uncomment to used the Websocket Controller
