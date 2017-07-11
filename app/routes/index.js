@@ -2,6 +2,7 @@
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var DataHandler = require(path + '/app/controllers/dataHandler.server.js');
 
 module.exports = function (app, passport, passportTwitter) {
 
@@ -18,6 +19,7 @@ module.exports = function (app, passport, passportTwitter) {
 	}
 
 	var clickHandler = new ClickHandler();
+	var dataHandler = new DataHandler();
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
@@ -67,4 +69,14 @@ module.exports = function (app, passport, passportTwitter) {
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
+		
+	app.route('/api/:id/info')
+		.get(isLoggedIn, dataHandler.getDatas);
+		
+	app.route('/api/:id/infoadd')
+		.post(isLoggedIn, dataHandler.addData);
+		
+	app.route('/api/:id/infodel')
+		.delete(isLoggedIn, dataHandler.deleteData);
+		
 };

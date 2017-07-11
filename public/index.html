@@ -41,11 +41,26 @@
 				<button type="submit" class="btn btn-add">CLICK ME!</button>
 				<button class="btn btn-delete">RESET</button>
 			</div>
+			
+			<br>
+			
+			New Data Name:<input type="text" name="name" id="name" class="form-control" placeholder="Name"><br>
+			
+              <button type="submit" class="btn btn-add btn-primary" id ="adddata">New Data!</button>
+              <button type="submit" class="btn btn-delete btn-danger" id ="deldata">Delete Data!</button>
+              <!--<a class="menu" href="/allwins">All Wins</a>-->
+              <br>
+              <br>
+              
+              <ul class="list-group" id="list">
+			</ul>
+			
 		</div>
 		
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
 		<script type="text/javascript" src="controllers/clickController.client.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
+		<script type="text/javascript" src="controllers/dataController.client.js"></script>
 		
 		<center>
 			<div id="includedFoot"></div>

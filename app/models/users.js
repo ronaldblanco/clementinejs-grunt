@@ -11,6 +11,9 @@ var User = new Schema({
         publicRepos: Number,
         photo: String
 	},
+	info: {
+      data: Array
+   },
    nbrClicks: {
       clicks: Number
    }
