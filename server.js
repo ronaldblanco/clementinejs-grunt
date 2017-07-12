@@ -7,6 +7,8 @@ var passport = require('passport');
 var passportTwitter = require('passport');
 var session = require('express-session');
 
+var compression = require('compression');
+
 var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
@@ -28,12 +30,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Forzing Cache of static//////////////
+//Forzing Cache of static/////////////////////////
 app.use(function (req, res, next) {
     console.log(req.url);
     //console.log(req);
     /*if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
-        console.log('match');
         res.set('Cache-Control', 'public, max-age=3600');
     }*/
     if (req.url.match('/public/css/bootstrap.min.css.map')) {
@@ -46,7 +47,19 @@ app.use(function (req, res, next) {
     }
     next();
 });
-//////////////////////////////////////
+/////////////////////////////////////////////////
+
+//COMPRESSION////////////////////////////////////
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header 
+    return false;
+  }
+  // fallback to standard filter function 
+  return compression.filter(req, res);
+}
+app.use(compression({filter: shouldCompress}));
+/////////////////////////////////////////////////
 
 routes(app, passport, passportTwitter);
 
