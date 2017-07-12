@@ -79,4 +79,24 @@ module.exports = function (app, passport, passportTwitter) {
 	app.route('/api/:id/infodel')
 		.delete(isLoggedIn, dataHandler.deleteData);
 		
+	//COMPRESSION Server-Sent Events/////////////////////
+	app.route('/api/:id/events')
+		.get(function (req, res) {
+			res.setHeader('Content-Type', 'text/event-stream');
+			res.setHeader('Cache-Control', 'no-cache');
+ 
+			// send a ping approx every 2 seconds 
+			var timer = setInterval(function () {
+    			res.write('data: ping\n\n');
+ 
+    			// !!! this is the important part 
+    			res.flush();
+			}, 2000);
+ 
+			res.on('close', function () {
+    			clearInterval(timer);
+			});
+	});
+	////////////////////////////////////////////////
+		
 };
