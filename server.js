@@ -30,8 +30,19 @@ app.use(passport.session());
 
 //Forzing Cache of static//////////////
 app.use(function (req, res, next) {
-    if (req.url.match(/^\/(css|js|img|font)\/.+/)) {
-        res.setHeader('Cache-Control', 'public, max-age=3600');
+    console.log(req.url);
+    //console.log(req);
+    /*if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
+        console.log('match');
+        res.set('Cache-Control', 'public, max-age=3600');
+    }*/
+    if (req.url.match('/public/css/bootstrap.min.css.map')) {
+        console.log('match bootstrap');
+        res.set('Cache-Control', 'public, max-age=3600');//seconds
+    }
+    if (req.url.match('/login') || req.url.match('/profile')) {
+        console.log('Cache Login or Profile');
+        res.set('Cache-Control', 'public, max-age=120');//seconds
     }
     next();
 });

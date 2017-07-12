@@ -17,7 +17,7 @@ module.exports = function (app, passport, passportTwitter) {
 	function isNotLoggedIn (req, res, next) {
 			return next();
 	}
-
+	
 	var clickHandler = new ClickHandler();
 	var dataHandler = new DataHandler();
 
