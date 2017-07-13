@@ -42,16 +42,9 @@ functions.ensureExists(__dirname + '/log', '0744', function(err) {
 //////////////////////////////////////////////////
 
 //LOGGER//////////////////////////////////////////
-var transport = new winston.transports.DailyRotateFile({
-    filename: './log/log',
-    datePattern: 'yyyy-MM-dd.',
-    prepend: true,
-    level: process.env.ENV === 'development' ? 'debug' : 'info'
-  });
-  
 var logger = new (winston.Logger)({
     transports: [
-      transport
+      functions.transport
     ]
   });
 logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
