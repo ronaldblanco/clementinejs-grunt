@@ -17,6 +17,8 @@ Added TWITTER passport Authentication<br>
 Added a sample of array manipulation inside mongodb<br>
 Forced Cache function<br>
 Added Compression<br>
+Working with Node 4.8.4<br>
+Added a Logging with Winston<br>
 
 Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
 

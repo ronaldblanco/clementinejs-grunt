@@ -8,6 +8,8 @@ var passportTwitter = require('passport');
 var session = require('express-session');
 
 var compression = require('compression');
+var winston = require('winston');
+  require('winston-daily-rotate-file');
 
 var app = express();
 require('dotenv').load();
@@ -30,19 +32,36 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//LOGGER//////////////////////////////////////////
+var transport = new winston.transports.DailyRotateFile({
+    filename: './log',
+    datePattern: 'yyyy-MM-dd.',
+    prepend: true,
+    level: process.env.ENV === 'development' ? 'debug' : 'info'
+  });
+  
+  var logger = new (winston.Logger)({
+    transports: [
+      transport
+    ]
+  });
+  logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
+/////////////////////////////////////////////////
+
 //Forzing Cache of static/////////////////////////
 app.use(function (req, res, next) {
-    console.log(req.url);
+    logger.info(req.url);
+    //console.log(req.url);
     //console.log(req);
     /*if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
         res.set('Cache-Control', 'public, max-age=3600');
     }*/
     if (req.url.match('/public/css/bootstrap.min.css.map')) {
-        console.log('match bootstrap');
+        logger.info('Cache bootstrap');
         res.set('Cache-Control', 'public, max-age=3600');//seconds
     }
     if (req.url.match('/login') || req.url.match('/profile')) {
-        console.log('Cache Login or Profile');
+        logger.info('Cache Login or Profile');
         res.set('Cache-Control', 'public, max-age=120');//seconds
     }
     next();
