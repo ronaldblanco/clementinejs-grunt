@@ -26,12 +26,12 @@ module.exports = {
   return compression.filter(req, res);
 },
   
-  cache: function(req, res, match ,maxAge){
+  /*cache: function(req, res, match ,maxAge){
       if (req.url.match(match)) {
         console.log('Cache bootstrap');
         res.set('Cache-Control', 'public, max-age=' + maxAge);//seconds
         return res;
     }
-  }  
+  }  */
   
 };

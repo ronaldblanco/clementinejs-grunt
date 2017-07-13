@@ -35,18 +35,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
-/*function ensureExists(path, mask, cb) {
-    if (typeof mask == 'function') { // allow the `mask` parameter to be optional
-        cb = mask;
-        mask = '0777';
-    }
-    fs.mkdir(path, mask, function(err) {
-        if (err) {
-            if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
-            else cb(err); // something else went wrong
-        } else cb(null); // successfully created folder
-    });
-}*/
 functions.ensureExists(__dirname + '/log', '0744', function(err) {
     if (err) console.error(err);
     else console.log('Folder Log was created or existed');
@@ -66,7 +54,6 @@ var logger = new (winston.Logger)({
       transport
     ]
   });
-  
 logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
@@ -90,14 +77,6 @@ app.use(function (req, res, next) {
 /////////////////////////////////////////////////
 
 //COMPRESSION////////////////////////////////////
-/*function shouldCompress (req, res) {
-  if (req.headers['x-no-compression']) {
-    // don't compress responses with this request header 
-    return false;
-  }
-  // fallback to standard filter function 
-  return compression.filter(req, res);
-}*/
 app.use(compression({filter: functions.shouldCompress}));
 /////////////////////////////////////////////////
 
