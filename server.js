@@ -11,6 +11,7 @@ var compression = require('compression');
 var winston = require('winston');
   require('winston-daily-rotate-file');
 var fs = require('fs');
+var functions = require('./app/common/functions.js');
 
 var app = express();
 require('dotenv').load();
@@ -34,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
-function ensureExists(path, mask, cb) {
+/*function ensureExists(path, mask, cb) {
     if (typeof mask == 'function') { // allow the `mask` parameter to be optional
         cb = mask;
         mask = '0777';
@@ -45,10 +46,10 @@ function ensureExists(path, mask, cb) {
             else cb(err); // something else went wrong
         } else cb(null); // successfully created folder
     });
-}
-ensureExists(__dirname + '/log', '0744', function(err) {
+}*/
+functions.ensureExists(__dirname + '/log', '0744', function(err) {
     if (err) console.error(err);
-    //else // we're all good
+    else console.log('Folder Log was created or existed');
 });
 //////////////////////////////////////////////////
 
@@ -60,19 +61,18 @@ var transport = new winston.transports.DailyRotateFile({
     level: process.env.ENV === 'development' ? 'debug' : 'info'
   });
   
-  var logger = new (winston.Logger)({
+var logger = new (winston.Logger)({
     transports: [
       transport
     ]
   });
-  logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
+  
+logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
 //Forzing Cache of static/////////////////////////
 app.use(function (req, res, next) {
     logger.info(req.url);
-    //console.log(req.url);
-    //console.log(req);
     /*if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
         res.set('Cache-Control', 'public, max-age=3600');
     }*/
@@ -80,6 +80,7 @@ app.use(function (req, res, next) {
         logger.info('Cache bootstrap');
         res.set('Cache-Control', 'public, max-age=3600');//seconds
     }
+    //res = functions.cache(req, res, '/public/css/bootstrap.min.css.map', '3600');
     if (req.url.match('/login') || req.url.match('/profile')) {
         logger.info('Cache Login or Profile');
         res.set('Cache-Control', 'public, max-age=120');//seconds
@@ -89,15 +90,15 @@ app.use(function (req, res, next) {
 /////////////////////////////////////////////////
 
 //COMPRESSION////////////////////////////////////
-function shouldCompress (req, res) {
+/*function shouldCompress (req, res) {
   if (req.headers['x-no-compression']) {
     // don't compress responses with this request header 
     return false;
   }
   // fallback to standard filter function 
   return compression.filter(req, res);
-}
-app.use(compression({filter: shouldCompress}));
+}*/
+app.use(compression({filter: functions.shouldCompress}));
 /////////////////////////////////////////////////
 
 routes(app, passport, passportTwitter);
