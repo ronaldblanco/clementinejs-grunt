@@ -1,14 +1,14 @@
 {
-  "name": "clementinejs-fcc",
+  "name": "clementinejs-fcc-pnald",
   "version": "1.0.1",
   "engines": {
     "node": "4.8.4"
   },
-  "description": "The elegant and lightweight boilerplate for full stack JavaScript.",
+  "description": "The elegant and lightweight boilerplate for full stack JavaScript by johnstonbl01 (Blake Johnston), with small additions.",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnstonbl01/clementinejs-fcc"
+    "url": "git+https://github.com/ronaldblanco/clementinejs"
   },
   "homepage": "http://www.clementinejs.com/",
   "bugs": "https://github.com/johnstonbl01/clementinejs-fcc/issues",
@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Blake Johnston",
+  "author": "Ronald Blanco",
   "license": "MIT",
   "dependencies": {
     "compression": "^1.7.0",
