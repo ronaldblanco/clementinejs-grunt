@@ -47,26 +47,21 @@ var logger = new (winston.Logger)({
       functions.transport
     ]
   });
-logger.info('//////////////////STARTING LOGGER INFO////////////////////////');
+functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
+///TESTS////////////////////////////////////////////////////
+var Promise = require('bluebird');
+function wrap(genFn) {
+    var cr = Promise.coroutine(genFn); // 2
+    return function (req, res, next) { // 3
+        cr(req, res, next).catch(next); // 4
+    };
+}
+///////////////////////////////////////////////////////
+
 //Forzing Cache of static/////////////////////////
-app.use(function (req, res, next) {
-    logger.info(req.url);
-    /*if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
-        res.set('Cache-Control', 'public, max-age=3600');
-    }*/
-    if (req.url.match('/public/css/bootstrap.min.css.map')) {
-        logger.info('Cache bootstrap');
-        res.set('Cache-Control', 'public, max-age=3600');//seconds
-    }
-    //res = functions.cache(req, res, '/public/css/bootstrap.min.css.map', '3600');
-    if (req.url.match('/login') || req.url.match('/profile')) {
-        logger.info('Cache Login or Profile');
-        res.set('Cache-Control', 'public, max-age=120');//seconds
-    }
-    next();
-});
+app.use(functions.cacheIt);
 /////////////////////////////////////////////////
 
 //COMPRESSION////////////////////////////////////

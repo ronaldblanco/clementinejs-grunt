@@ -4,8 +4,12 @@ var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var DataHandler = require(path + '/app/controllers/dataHandler.server.js');
 
-module.exports = function (app, passport, passportTwitter) {
+///ERROR HANDLING/////////////////////////////////////////////////
+//var Promise = require('bluebird');
+//////////////////////////////////////////////////////////////////
 
+module.exports = function (app, passport, passportTwitter) {
+	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
 			return next();
@@ -15,8 +19,27 @@ module.exports = function (app, passport, passportTwitter) {
 	}
 	
 	function isNotLoggedIn (req, res, next) {
-			return next();
+		return next();
 	}
+	
+	///////////////////////////////////////////////	
+	/*function wrap (genFn) { // 1
+    	var cr = Promise.coroutine(genFn); // 2
+    	return function (req, res, next) { // 3
+        	cr(req, res, next).catch(next); // 4
+        	if (req.isAuthenticated()) {
+        		res.sendFile(path + '/public/index.html');
+				return next();
+			} else {
+				res.redirect('/login');
+			}
+    	};
+	}
+	app.use(function (err, req, res, next) {
+	  if(err) console.log(err);
+	  else console.log('OK');
+	});*/
+	///////////////////////////////////////////////
 	
 	var clickHandler = new ClickHandler();
 	var dataHandler = new DataHandler();
@@ -25,6 +48,11 @@ module.exports = function (app, passport, passportTwitter) {
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
+		
+	/*app.route('/')
+		.get(wrap(function *(req, res) {
+			//res.sendFile(path + '/public/index.html');
+		}));*/
 		
 	app.route('/login')
 		.get(function (req, res) {
