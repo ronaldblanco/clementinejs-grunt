@@ -25,6 +25,11 @@ module.exports = {
     }
     next();
   },
+  
+  //TESTS ONLY
+  checkIt: function(req, res, next) {
+    next();
+  },
     
   ensureExists: function (path, mask, cb) {
     if (typeof mask == 'function') { // allow the `mask` parameter to be optional
