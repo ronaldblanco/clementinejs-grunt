@@ -50,27 +50,6 @@ var logger = new (winston.Logger)({
 functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
-///TESTS////////////////////////////////////////////////////
-/*var Promise = require('bluebird');
-function wrap(genFn) {
-    var cr = Promise.coroutine(genFn); // 2
-    return function (req, res, next) { // 3
-        cr(req, res, next).catch(next); // 4
-    };
-}*/
-/*app.get('/', wrap(function *(req, res) {
-    if (req.isAuthenticated()) {
-        res.sendFile(process.cwd() + '/public/index.html');
-    }else {
-		res.redirect('/login');
-	}
-}));*/
-/*app.use(function (err, req, res, next) {
-  console.log('BLUEBIRD!');
-  functions.logIt(logger,err);
-});*/
-///////////////////////////////////////////////////////
-
 //Forzing Cache of static/////////////////////////
 app.use(functions.cacheIt);
 /////////////////////////////////////////////////

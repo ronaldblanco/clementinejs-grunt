@@ -27,7 +27,6 @@
   "author": "Ronald Blanco",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.0",
     "compression": "^1.7.0",
     "dotenv": "^1.2.0",
     "express": "^4.15.3",
