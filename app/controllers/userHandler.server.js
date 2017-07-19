@@ -3,6 +3,7 @@
 var Users = require('../models/users.js');
 //var url = require("urlparser");
 var randomize = require('randomatic');
+var md5Hex = require('md5-hex');
 
 function UserHandler () {
     
@@ -11,7 +12,7 @@ function UserHandler () {
 		var newUser = new Users();
 					
 		newUser.login.username = req.body.username;
-		newUser.login.password = req.body.password;
+		newUser.login.password = md5Hex(req.body.password);
 		newUser.login.id = randomize('0', 7);
 		newUser.login.displayName = req.body.display;
 		//console.log(req.body);

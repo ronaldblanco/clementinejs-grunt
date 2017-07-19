@@ -1,7 +1,7 @@
 'use strict';
 
 var localStrategy = require('passport-local').Strategy;
-
+var md5Hex = require('md5-hex');
 //var twitterStrategy = require('passport-twitter').Strategy;
 //var GitHubStrategy = require('passport-github').Strategy;
 var User = require('../models/users');
@@ -17,7 +17,7 @@ module.exports = function (passportLocal) {
 	
 	passportLocal.use(new localStrategy(
 		function(username, password, cb) {
-    		User.findOne({ 'login.username': username, 'login.password': password}, function(err, user) {
+    		User.findOne({ 'login.username': username, 'login.password': md5Hex(password)}, function(err, user) {
     			if (err) { return cb(err); }
     			if (!user) { return cb(null, false); }
     			//if (user) { return cb(null, false); }
