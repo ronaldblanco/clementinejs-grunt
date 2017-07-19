@@ -5,6 +5,7 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var passportTwitter = require('passport');
+var passportLocal = require('passport');
 var session = require('express-session');
 
 var compression = require('compression');
@@ -17,6 +18,7 @@ var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
 require('./app/config/passport-twitter')(passportTwitter);
+require('./app/config/passport-local')(passportLocal);
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
@@ -24,6 +26,11 @@ mongoose.Promise = global.Promise;
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
+
+//////////////////////////////////////////////
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+//////////////////////////////////////////////
 
 app.use(session({
 	secret: 'secretClementine',
@@ -58,7 +65,7 @@ app.use(functions.cacheIt);
 app.use(compression({filter: functions.shouldCompress}));
 /////////////////////////////////////////////////
 
-routes(app, passport, passportTwitter);
+routes(app, passport, passportTwitter, passportLocal);
 
 //Uncomment to used the Websocket Controller
 //using: socket.io http and model config.js as test

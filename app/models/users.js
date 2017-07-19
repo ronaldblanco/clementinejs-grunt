@@ -8,8 +8,10 @@ var User = new Schema({
 		id: String,
 		displayName: String,
 		username: String,
-        publicRepos: Number,
-        photo: String
+      publicRepos: Number,
+      photo: String,
+      email: String,
+      password: String
 	},
 	info: {
       data: Array

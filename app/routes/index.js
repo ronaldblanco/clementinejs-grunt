@@ -6,9 +6,10 @@ var DataHandler = require(path + '/app/controllers/dataHandler.server.js');
 
 //var Promise = require('bluebird');
 
-module.exports = function (app, passport, passportTwitter) {
+module.exports = function (app, passport, passportTwitter, passportLocal) {
 	
 	function isLoggedIn (req, res, next) {
+		//console.log(req.user);
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
@@ -89,7 +90,21 @@ module.exports = function (app, passport, passportTwitter) {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
-
+	
+	/////////////////////////////////////////////////////////////////	
+	app.route('/authlocal')
+		.get(function (req, res) {
+			res.sendFile(path + '/public/loginlocal.html');
+		});
+		
+	app.route('/auth/local') 
+		.post(passportLocal.authenticate('local', { 
+			failureRedirect: '/authlocal' }),
+		function(req, res) {
+    		res.redirect('/');
+		});
+	/////////////////////////////////////////////////////////////////
+	
 	app.route('/api/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
