@@ -1,7 +1,7 @@
 'use strict';
 
 var localStrategy = require('passport-local').Strategy;
-var randomize = require('randomatic');
+
 //var twitterStrategy = require('passport-twitter').Strategy;
 //var GitHubStrategy = require('passport-github').Strategy;
 var User = require('../models/users');

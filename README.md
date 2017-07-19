@@ -12,13 +12,16 @@ Added a controller for web socket use with socket.io<br>
 Added head.html and foot.html to do more easy the html customization<br>
 Added urlparser<br>
 Added TWITTER passport Authentication<br>
-     TWITTER_KEY=your-client-id-here<br>
-     TWITTER_SECRET=your-client-secret-here<br>
+     ---TWITTER_KEY=your-client-id-here<br>
+     ---TWITTER_SECRET=your-client-secret-here<br>
 Added a sample of array manipulation inside mongodb<br>
 Forced Cache function<br>
 Added Compression<br>
 Working with Node 4.8.4<br>
 Added a Logging with Winston<br>
+Added body-parser<br>
+Added cookie-parser<br>
+Added LOCAL passport Authentication<br>
 
 Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
 

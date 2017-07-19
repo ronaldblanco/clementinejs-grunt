@@ -8,18 +8,9 @@
 	</head>
 
 	<body>
+		<div class="w3-container">	
+		<h2>THE USER WAS CREATED SUCESFULLY!</h2>
 		
-		<div class="w3-row-padding">
-			
-			<div class="w3-third">
-			<center>
-			<img src="/public/img/clementine_150.png" />
-			<br />
-			<p class="clementine-text">Clementine.js</p>
-			<center>
-		</div>
-				
-				<div class="w3-third">
 <form action="/auth/local" method="post">
 	<h3>LOGIN LOCAL USER</h3>
 	<div class="form-group">
@@ -39,36 +30,9 @@
 	</div>
 	</div>
 </form>
-			</div>
-
-			<div class="w3-third">
-<form action="/auth/localnew" method="post">
-	<h3>CREATE LOCAL USER</h3>
-	<div class="form-group">
-	<div>
-	<label>Username:</label>
-	<input type="text" name="username"class="form-control" placeholder="Username"/><br/>
-	</div>
-	<div>
-	<label>Display Name:</label>
-	<input type="text" name="display"class="form-control" placeholder="Display Name"/><br/>
-	</div>
-	<div>
-	<label>Password:</label>
-	<input type="password" name="password" class="form-control" placeholder="Password"/>
-	</div>
-	</div>
-	<br>
-	<div class="form-group">
-	<div>
-	<input type="submit" class="btn btn-primary" value="Submit"/>
-	</div>
-	</div>
-</form>
-				</div>
-				
-	</div>				
-	
+		</div>
+		
+		
 		<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
 		<script src="/public/js/jquery-2.2.4.min.js"></script>
 		<script> 

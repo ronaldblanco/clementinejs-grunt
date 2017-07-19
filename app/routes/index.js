@@ -3,6 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var DataHandler = require(path + '/app/controllers/dataHandler.server.js');
+var UserHandler = require(path + '/app/controllers/userHandler.server.js');
 
 //var Promise = require('bluebird');
 
@@ -40,6 +41,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal) {
 	
 	var clickHandler = new ClickHandler();
 	var dataHandler = new DataHandler();
+	var userHandler = new UserHandler();
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
@@ -98,10 +100,23 @@ module.exports = function (app, passport, passportTwitter, passportLocal) {
 		});
 		
 	app.route('/auth/local') 
+		.get(passportLocal.authenticate('local', { 
+			failureRedirect: '/authlocal' }),
+		function(req, res) {
+    		res.redirect('/');
+		})
 		.post(passportLocal.authenticate('local', { 
 			failureRedirect: '/authlocal' }),
 		function(req, res) {
     		res.redirect('/');
+		});
+		
+	app.route('/auth/localnew')
+		.post(isNotLoggedIn, userHandler.addUser);
+		
+	app.route('/auth/localnewok')
+		.get(function (req, res) {
+			res.sendFile(path + '/public/usercreationOK.html');
 		});
 	/////////////////////////////////////////////////////////////////
 	
