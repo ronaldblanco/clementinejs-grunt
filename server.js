@@ -10,11 +10,12 @@ var session = require('express-session');
 
 var compression = require('compression');
 var winston = require('winston');
-  require('winston-daily-rotate-file');
+require('winston-daily-rotate-file');
 var fs = require('fs');
 var functions = require('./app/common/functions.js');
 
 var app = express();
+
 require('dotenv').load();
 require('./app/config/passport')(passport);
 require('./app/config/passport-twitter')(passportTwitter);
@@ -22,6 +23,16 @@ require('./app/config/passport-local')(passportLocal);
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
+
+/////EMAIL CONFIG////////////////////////////////////////////////////////////////////////////
+app.use('/emailjs', express.static(process.cwd() + '/node_modules/emailjs'));
+var emailServer = {
+    'user' : process.env.EMAILUSER,
+    'password' : process.env.EMAILPASS,
+    'host' : process.env.EMAILHOST,
+    'port' : process.env.EMAILPORT
+};
+////////////////////////////////////////////////////////////////////////////////////
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -65,7 +76,7 @@ app.use(functions.cacheIt);
 app.use(compression({filter: functions.shouldCompress}));
 /////////////////////////////////////////////////
 
-routes(app, passport, passportTwitter, passportLocal);
+routes(app, passport, passportTwitter, passportLocal, emailServer);
 
 //Uncomment to used the Websocket Controller
 //using: socket.io http and model config.js as test

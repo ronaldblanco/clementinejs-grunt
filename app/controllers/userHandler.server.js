@@ -1,8 +1,7 @@
 'use strict';
 
 var Users = require('../models/users.js');
-//var email = require("../emailjs/email");
-//console.log(process.cwd()+"/node_modules/emailjs/email");
+var email = require("emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
 // Helper to validate email based on regex
@@ -17,10 +16,18 @@ function validateEmail (email) {
 }
 /////////////////////////////////////////////////////
 
-function UserHandler () {
-    
+function UserHandler (emailServer) {
+	
+	var server 	= email.server.connect({
+		'user':    emailServer.user, 
+		'password': emailServer.password, 
+		'host':    emailServer.host,
+		'port': emailServer.port,
+		'ssl':     false
+	});
+
     this.addUser = function (req, res) {//Add Local user
-    
+    //console.log(emailServer);
     	
     	Users
 			.findOne({ 'login.username': req.body.username/*, 'login.password': md5Hex(req.body.password) */}, { '_id': false })
@@ -46,16 +53,10 @@ function UserHandler () {
 							throw err;
 						}
 						/////////////Email send!!////////////////////
-						/*if(email != false){
-							var server 	= email.server.connect({
-							user:    process.env.EMAILUSER, 
-							password:process.env.EMAILPASS, 
-							host:    process.env.EMAILHOST,
-							port: process.env.EMAILPORT,
-							ssl:     false
-						});
-						
+						if(email != false){
+							
 						// send the message and get a callback with an error or details of the message that was sent 
+						//console.log(server);
 						server.send({
 						   text:    "Welcome to Clementine Pnald version!", 
 						   from:    "Admin <rblanco@gammaseafood.com>", 
@@ -65,7 +66,7 @@ function UserHandler () {
 						   subject: "Welcome Email!"
 						}, function(err, message) { console.log(err || message); });
 						
-						}*/
+						}
 						////////////////////////////////
 						//res.send({'message':'User was created correctly!'});
 						res.redirect('/auth/localnewok');

@@ -7,7 +7,7 @@ var UserHandler = require(path + '/app/controllers/userHandler.server.js');
 
 //var Promise = require('bluebird');
 
-module.exports = function (app, passport, passportTwitter, passportLocal) {
+module.exports = function (app, passport, passportTwitter, passportLocal, emailServer) {
 	
 	function isLoggedIn (req, res, next) {
 		//console.log(req.user);
@@ -41,7 +41,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal) {
 	
 	var clickHandler = new ClickHandler();
 	var dataHandler = new DataHandler();
-	var userHandler = new UserHandler();
+	var userHandler = new UserHandler(emailServer);
 	
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
