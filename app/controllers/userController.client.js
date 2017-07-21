@@ -2,52 +2,44 @@
 
 (function () {
 
-   var photoId = document.querySelector('#photoId') || null;
-   var repo = document.querySelector('#repo') || null;
-   var profileId = document.querySelector('#profile-id') || null;
-   var profileUsername = document.querySelector('#profile-username') || null;
-   //var profileRepos = document.querySelector('#profile-repos') || null;
-   var displayName = document.querySelector('#display-name');
-   var apiUrl = appUrl + '/api/:id';
+   var login = document.querySelector('#login') || null;
+   var create = document.querySelector('#create') || null;
+   var reset = document.querySelector('#reset') || null;
+   var authform = document.querySelector('#authform') || null;
+   var message = document.querySelector('#message') || null;
+   var apiUrl = appUrl + '/auth/localnew';
 
-   function updateHtmlElement (data, element, userProperty) {
-      element.innerHTML = data[userProperty];
+   function updateForm (ope) {
+      if(ope == 'login') authform.innerHTML = '<form action="/auth/local" method="post">	<h3>LOGIN LOCAL USER</h3>	<div class="form-group">	<div>	<label>Username:</label>	<input type="text" name="username"class="form-control" placeholder="Email"/><br/>	</div>	<div>	<label>Password:</label>	<input type="password" name="password" class="form-control" placeholder="Password"/>	</div>	</div>	<br>	<div class="form-group">	<div>	<input type="submit" class="btn btn-primary" value="Submit"/>	</div>	</div></form>';
+      if(ope == 'create') authform.innerHTML = '<form action="/auth/localnew" method="post">	<h3>CREATE LOCAL USER</h3>	<div class="form-group">	<div>	<label>Username:</label>	<input type="text" name="username"class="form-control" placeholder="Username"/><br/>	</div>	<div>	<label>Display Name:</label>	<input type="text" name="display"class="form-control" placeholder="Display Name"/><br/>	</div>	<div>	<label>Password:</label>	<input type="password" name="password" class="form-control" placeholder="Password"/>	</div>	</div>	<br>	<div class="form-group">	<div>	<input type="submit" class="btn btn-primary" value="Submit"/>	</div>	</div></form>';
+      if(ope == 'reset') authform.innerHTML = '<p>Only if your username is a valid email!</p><br> Username:<input type="text" name="name" id="resetusername" class="form-control" placeholder="username"><br>  <button type="submit" class="btn btn-add btn-primary" id ="resetaction">Reset!</button>';
+   }
+   
+   function updateMess (data){
+      var info = JSON.parse(data);
+      if(info.message != null && info.message != undefined){
+         message.innerHTML = '<h2>'+ info.message +'</h2>';
+      }
    }
 
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function (data) {
-      var userObject = JSON.parse(data);
+   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateForm('login')));
+   
+   login.addEventListener('click', function () {
 
-      if (userObject.displayName !== null) {
-         updateHtmlElement(userObject, displayName, 'displayName');
-      } else {
-         updateHtmlElement(userObject, displayName, 'username');
-      }
-
-      if (profileId !== null) {
-         updateHtmlElement(userObject, profileId, 'id');   
-      }
-
-      if (profileUsername !== null) {
-         updateHtmlElement(userObject, profileUsername, 'username');   
-      }
-
-      if(userObject.publicRepos !== undefined && repo !== null){
-         if (userObject.publicRepos !== null) {
-            repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">'+ userObject.publicRepos +'</span></p>';
-            //updateHtmlElement(userObject, profileRepos, 'publicRepos'); 
-         }
-      }else if(userObject.publicRepos === undefined && repo !== null){
-         repo.innerHTML =  '<p><span>Repositories: </span><span id="profile-repos" class="profile-value">No Info!</span></p>'; 
-      }
+         ajaxFunctions.ajaxRequest('GET', apiUrl, updateForm('login'));
       
-      if(userObject.photo !== undefined && photoId !== null){
-         if (userObject.photo !== null && photoId !== null) {
-            photoId.innerHTML =  '<img src='+userObject.photo+' class = "img-rounded">';
-         }
-      } else if(userObject.photo === undefined && photoId !== null) {
-         photoId.innerHTML =  '<img src="/public/img/gh-mark-32px.png" alt="github logo" />';
-      }
-      
+   }, false);
+   
+   create.addEventListener('click', function () {
 
-   }));
+         ajaxFunctions.ajaxRequest('GET', apiUrl, updateForm('create'));
+      
+   }, false);
+   
+   reset.addEventListener('click', function () {
+
+         ajaxFunctions.ajaxRequest('GET', apiUrl, updateForm('reset'));
+      
+   }, false);
+   
 })();

@@ -1,7 +1,8 @@
 'use strict';
 
 var Users = require('../models/users.js');
-//var emailCheck = require('email-check');
+//var email = require("../emailjs/email");
+//console.log(process.cwd()+"/node_modules/emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
 // Helper to validate email based on regex
@@ -26,7 +27,7 @@ function UserHandler () {
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				console.log(result);
+				//console.log(result);
 				if(result === null){
 					
 					
@@ -44,13 +45,38 @@ function UserHandler () {
 						if (err) {
 							throw err;
 						}
-
+						/////////////Email send!!////////////////////
+						/*if(email != false){
+							var server 	= email.server.connect({
+							user:    process.env.EMAILUSER, 
+							password:process.env.EMAILPASS, 
+							host:    process.env.EMAILHOST,
+							port: process.env.EMAILPORT,
+							ssl:     false
+						});
+						
+						// send the message and get a callback with an error or details of the message that was sent 
+						server.send({
+						   text:    "Welcome to Clementine Pnald version!", 
+						   from:    "Admin <rblanco@gammaseafood.com>", 
+						   //to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
+						   to:      "New User <"+ email +">",
+						   //cc:      "else <else@your-email.com>",
+						   subject: "Welcome Email!"
+						}, function(err, message) { console.log(err || message); });
+						
+						}*/
+						////////////////////////////////
+						//res.send({'message':'User was created correctly!'});
 						res.redirect('/auth/localnewok');
 					});	
 					
 					
 					
-				} else res.redirect('/auth/localnewok');
+				} else{
+					//res.send({'message':'The username is in the database!'});
+					res.redirect('/auth/localnewok');
+				} 
 			});
     	
     

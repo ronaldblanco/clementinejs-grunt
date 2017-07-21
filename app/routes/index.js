@@ -42,7 +42,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal) {
 	var clickHandler = new ClickHandler();
 	var dataHandler = new DataHandler();
 	var userHandler = new UserHandler();
-
+	
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/index.html');

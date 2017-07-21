@@ -1,28 +1,26 @@
-var emailCheck = require('email-check');
-var email = 'rblanco';
-// With custom options 
-		/*emailCheck(email, {
-		from: 'rblanco@gammaseafood.com',
-		host: 'mail.gammaseafood.com',
-		timeout: 3000
-		})
-		.then(function (result) {
-			console.log(email);
-    		console.log(result);
-    	})
-		.catch(function (err) {
-    		console.error(err);
-		});*/
+var email 	= require("./node_modules/emailjs/email");
+var server 	= email.server.connect({
+   user:    "rblanco@gammaseafood.com", 
+   password:"", 
+   host:    "mail.gammaseafood.com",
+   port: 1025,
+   ssl:     false
+});
 
-// Helper to validate email based on regex
-const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-
-function validateEmail (email) {
-  if (typeof email === 'string' && email.length > 5 && email.length < 61 && EMAIL_REGEX.test(email)) {
-    return email.toLowerCase();
-  } else {
-    return false;
-  }
-}
-
-console.log(validateEmail(email));
+/*var server 	= email.server.connect({
+   user:    process.env.EMAILUSER, 
+   password:process.env.EMAILPASS, 
+   host:    process.env.EMAILHOST,
+   port: process.env.EMAILPORT,
+   ssl:     false
+});*/
+ 
+// send the message and get a callback with an error or details of the message that was sent 
+server.send({
+   text:    "i hope this works", 
+   from:    "you <rblanco@gammaseafood.com>", 
+   //to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
+   to:      "someone <rblanco@gammaseafood.com>",
+   //cc:      "else <else@your-email.com>",
+   subject: "testing emailjs"
+}, function(err, message) { console.log(err || message); });

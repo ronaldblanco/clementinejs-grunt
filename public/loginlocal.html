@@ -24,10 +24,21 @@
 			<img src="/public/img/clementine_150.png" />
 			<br />
 			<p class="clementine-text">Clementine.js</p>
+			
+			<button type="submit" class="btn btn-add btn-primary" id ="login">Login User!</button>
+			<button type="submit" class="btn btn-add" id ="create">Create User!</button>
+			<button type="submit" class="btn btn-del" id ="reset">Reset Password!</button>
 			<center>
 		</div>
+		
+		
+		<div class="w3-third" id="message">
+			</div>
+		
+		<div class="w3-third" id="authform">
+			</div>
 				
-				<div class="w3-third">
+				<!--<div class="w3-third">
 <form action="/auth/local" method="post">
 	<h3>LOGIN LOCAL USER</h3>
 	<div class="form-group">
@@ -44,6 +55,7 @@
 	<div class="form-group">
 	<div>
 	<input type="submit" class="btn btn-primary" value="Submit"/>
+	
 	</div>
 	</div>
 </form>
@@ -73,9 +85,12 @@
 	</div>
 	</div>
 </form>
-				</div>
+				</div>-->
 				
-	</div>				
+	</div>
+	
+		<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>
 	
 		<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
 		<script src="/public/js/jquery-2.2.4.min.js"></script>
