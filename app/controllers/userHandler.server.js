@@ -1,9 +1,11 @@
 'use strict';
 
 var Users = require('../models/users.js');
+//var Users1 = require('../models/users.js');
 var email = require("emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
+var url = require("urlparser");
 // Helper to validate email based on regex
 const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 /////////////////////////////////////////////////////
@@ -27,18 +29,14 @@ function UserHandler (emailServer) {
 	});
 
     this.addUser = function (req, res) {//Add Local user
-    //console.log(emailServer);
-    	
+    
     	Users
 			.findOne({ 'login.username': req.body.username/*, 'login.password': md5Hex(req.body.password) */}, { '_id': false })
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				//console.log(result);
 				if(result === null){
-					
-					
-					
+				
 					var newUser = new Users();
 					
 					newUser.login.username = req.body.username;
@@ -71,18 +69,40 @@ function UserHandler (emailServer) {
 						//res.send({'message':'User was created correctly!'});
 						res.redirect('/auth/localnewok');
 					});	
-					
-					
-					
+		
 				} else{
 					//res.send({'message':'The username is in the database!'});
 					res.redirect('/auth/localnewok');
 				} 
 			});
+ 
+	};
+	
+	this.resetPass = function (req, res) {//Reset Password
+	
+		var username = req.originalUrl.toString().split('?name=')[1];
+		var newPass = randomize('0', 7);
     	
-    
-    	
-
+    	Users
+			.findOneAndUpdate({ 'login.username': username}, { 'login.password': md5Hex(newPass) })
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				// send the message and get a callback with an error or details of the message that was sent 
+				//console.log(server);
+				server.send({
+						text:    "Your new password is: "+newPass, 
+						from:    "Admin <rblanco@gammaseafood.com>", 
+						//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
+						to:      "New User <"+ username +">",
+						//cc:      "else <else@your-email.com>",
+						subject: "Your password was reset!"
+				}, function(err, message) { console.log(err || message); });
+				
+				res.redirect('/auth/localnewok');
+				
+			});
+ 
 	};
     
 }

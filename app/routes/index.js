@@ -114,6 +114,9 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	app.route('/auth/localnew')
 		.post(isNotLoggedIn, userHandler.addUser);
 		
+	app.route('/auth/localnewreset')
+		.post(isNotLoggedIn, userHandler.resetPass);
+	
 	app.route('/auth/localnewok')
 		.get(function (req, res) {
 			res.sendFile(path + '/public/usercreationOK.html');
