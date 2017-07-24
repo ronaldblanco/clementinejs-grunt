@@ -18,7 +18,7 @@
    function updateMess (data){
       var info = JSON.parse(data);
       if(info.message != null && info.message != undefined){
-         message.innerHTML = '<h2>'+ info.message +'</h2>';
+         message.innerHTML = '<div class="'+info.type+'"><h2>'+ info.message +'</h2></div>';
       }
    }
 
@@ -43,6 +43,7 @@
          document.querySelector('#resetaction').addEventListener('click', function(){
             var resetUsername = document.querySelector('#resetusername').value;
             ajaxFunctions.ajaxRequest('POST', apiUrl + 'reset?name=' + resetUsername, function () {
+               ajaxFunctions.ajaxRequest('GET', apiUrl+'message', updateMess);
                ajaxFunctions.ajaxRequest('GET', apiUrl, updateForm('login'));
             });
          });

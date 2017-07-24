@@ -116,6 +116,9 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 		
 	app.route('/auth/localnewreset')
 		.post(isNotLoggedIn, userHandler.resetPass);
+		
+	app.route('/auth/localnewmessage')
+		.get(isNotLoggedIn, userHandler.message);
 	
 	app.route('/auth/localnewok')
 		.get(function (req, res) {

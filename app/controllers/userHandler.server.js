@@ -1,6 +1,7 @@
 'use strict';
 
 var Users = require('../models/users.js');
+var message = require('../models/message.js');
 //var Users1 = require('../models/users.js');
 var email = require("emailjs/email");
 var randomize = require('randomatic');
@@ -82,11 +83,17 @@ function UserHandler (emailServer) {
 						}
 						////////////////////////////////
 						//res.send({'message':'User was created correctly!'});
+						message.message = "The User was created correctly!";
+						message.type = "alert alert-success";
+						//res.send({});
 						res.redirect('/auth/localnewok');
 					});	
 		
 				} else{
 					//res.send({'message':'The username is in the database!'});
+					message.message = "The User already exist in the database!";
+					message.type = "alert alert-info";
+					//res.send({});
 					res.redirect('/auth/localnewok');
 				} 
 			});
@@ -97,6 +104,9 @@ function UserHandler (emailServer) {
 	
 		var username = req.originalUrl.toString().split('?name=')[1];
 		var newPass = randomize('0', 7);
+		
+		var email = validateEmail(username);
+		if(email != false){
     	
     	Users
 			.findOneAndUpdate({ 'login.username': username}, { 'login.password': md5Hex(newPass) })
@@ -114,10 +124,23 @@ function UserHandler (emailServer) {
 						subject: "Your password was reset!"
 				}, function(err, message) { functions.logIt(logger, err || message) });
 				
-				res.redirect('/auth/localnewok');
+				//res.redirect('/auth/localnewok');
+				message.message = "The password was reset correctly; an email was send to the user!";
+				message.type = "alert alert-success";
+				res.send({"message":"The password was reset correctly; an email was send to the user!"});
 				
 			});
+			
+		} else {
+			message.type = "alert alert-warning";
+			message.message = "The username it is not a valid email account!";
+			res.send({"message":"The username it is not a valid email account!"});
+		}
  
+	};
+	
+	this.message = function(req, res){
+		res.send(message);
 	};
     
 }
