@@ -1,9 +1,9 @@
 var email 	= require("./node_modules/emailjs/email");
 var server 	= email.server.connect({
-   user:    "rblanco@gammaseafood.com", 
+   user:    "", 
    password:"", 
-   host:    "mail.gammaseafood.com",
-   port: 1025,
+   host:    "",
+   port: 25,
    ssl:     false
 });
 
@@ -18,9 +18,9 @@ var server 	= email.server.connect({
 // send the message and get a callback with an error or details of the message that was sent 
 server.send({
    text:    "i hope this works", 
-   from:    "you <rblanco@gammaseafood.com>", 
-   //to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
-   to:      "someone <rblanco@gammaseafood.com>",
+   from:    "you <>", 
+   //to:      "someone <>, another <another@your-email.com>",
+   to:      "someone <>",
    //cc:      "else <else@your-email.com>",
    subject: "testing emailjs"
 }, function(err, message) { console.log(err || message); });
