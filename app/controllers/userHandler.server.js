@@ -6,6 +6,21 @@ var email = require("emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
 var url = require("urlparser");
+
+var winston = require('winston');
+require('winston-daily-rotate-file');
+var fs = require('fs');
+var functions = require('../common/functions.js');
+
+//LOGGER//////////////////////////////////////////
+var logger = new (winston.Logger)({
+    transports: [
+      functions.transport
+    ]
+  });
+//functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
+/////////////////////////////////////////////////
+
 // Helper to validate email based on regex
 const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 /////////////////////////////////////////////////////
@@ -62,7 +77,7 @@ function UserHandler (emailServer) {
 						   to:      "New User <"+ email +">",
 						   //cc:      "else <else@your-email.com>",
 						   subject: "Welcome Email!"
-						}, function(err, message) { console.log(err || message); });
+						}, function(err, message) { functions.logIt(logger, err || message)});
 						
 						}
 						////////////////////////////////
@@ -97,7 +112,7 @@ function UserHandler (emailServer) {
 						to:      "New User <"+ username +">",
 						//cc:      "else <else@your-email.com>",
 						subject: "Your password was reset!"
-				}, function(err, message) { console.log(err || message); });
+				}, function(err, message) { functions.logIt(logger, err || message) });
 				
 				res.redirect('/auth/localnewok');
 				

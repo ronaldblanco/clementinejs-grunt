@@ -3,6 +3,24 @@ var compression = require('compression');
 var winston = require('winston');
   require('winston-daily-rotate-file');
 
+//LOGGER//////////////////////////////////////////
+var transport= new winston.transports.DailyRotateFile({
+    filename: './log/log',
+    datePattern: 'yyyy-MM-dd.',
+    prepend: true,
+    level: process.env.ENV === 'development' ? 'debug' : 'info'
+  });
+var logger = new (winston.Logger)({
+    transports: [
+      transport
+    ]
+  });
+function logIt (logger, info){
+    logger.info(info);
+}
+//functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
+/////////////////////////////////////////////////
+
 module.exports = {
   
   logIt: function(logger, info){
@@ -10,7 +28,8 @@ module.exports = {
   },
   
   cacheIt: function(req, res, next) {
-    console.log(req.url);
+    logIt(logger,req.url);
+    //console.log(req.url);
     //if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
         //res.set('Cache-Control', 'public, max-age=3600');
     //}
