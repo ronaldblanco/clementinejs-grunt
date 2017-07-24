@@ -23,6 +23,10 @@ Added body-parser<br>
 Added cookie-parser<br>
 Added LOCAL passport Authentication<br>
 Added emailjs for the local Auth...<br>
+    ---EMAILUSER=email<br>
+    ---EMAILPASS=password<br>
+    ---EMAILHOST=hostserver<br>
+    ---EMAILPORT=port<br>
 
 Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
 
