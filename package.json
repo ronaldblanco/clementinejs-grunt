@@ -2,7 +2,7 @@
   "name": "clementinejs-fcc-pnald",
   "version": "1.0.1",
   "engines": {
-    "node": "4.8.4"
+    "node": "6.11.1"
   },
   "description": "The elegant and lightweight boilerplate for full stack JavaScript by johnstonbl01 (Blake Johnston), with small additions.",
   "main": "server.js",
