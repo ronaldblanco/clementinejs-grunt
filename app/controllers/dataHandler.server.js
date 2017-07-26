@@ -1,10 +1,10 @@
-'use strict';
+
 
 var Users = require('../models/users.js');
 var url = require("urlparser");
 
 function DataHandler () {
-	
+	'use strict';
 	this.getDatas = function (req, res) {
 		Users
 			.findOne({ 'login.id': req.user.login.id }, { '_id': false })

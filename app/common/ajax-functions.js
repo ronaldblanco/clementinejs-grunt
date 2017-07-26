@@ -1,4 +1,3 @@
-'use strict';
 
 var appUrl = window.location.origin;
 var ajaxFunctions = {
@@ -14,9 +13,11 @@ var ajaxFunctions = {
       document.addEventListener('DOMContentLoaded', fn, false);
    },
    ajaxRequest: function ajaxRequest (method, url, callback) {
+      'use strict';
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function () {
+         
          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             callback(xmlhttp.response);
          }

@@ -1,7 +1,7 @@
-'use strict';
+
 
 (function () {
-
+   'use strict';
    var photoId = document.querySelector('#photoId') || null;
    var repo = document.querySelector('#repo') || null;
    var profileId = document.querySelector('#profile-id') || null;

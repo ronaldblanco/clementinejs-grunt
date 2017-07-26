@@ -22,7 +22,10 @@
     "boilerplate"
   ],
   "scripts": {
-    "start": "node server.js"
+    "start": "grunt",
+    "test": "grunt test",
+    "postinstall": "bower install --config.interactive=false",
+    "heroku-postbuild": "grunt build"
   },
   "author": "Ronald Blanco",
   "license": "MIT",
@@ -35,6 +38,16 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "fs": "0.0.1-security",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-qunit": "^2.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "jshint-stylish": "^2.2.1",
     "md5-hex": "^2.0.0",
     "mongoose": "^4.10.8",
     "passport": "^0.3.0",

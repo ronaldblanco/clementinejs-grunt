@@ -1,4 +1,4 @@
-'use strict';
+
 
 var Users = require('../models/users.js');
 var message = require('../models/message.js');
@@ -6,12 +6,12 @@ var message = require('../models/message.js');
 var email = require("emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
-var url = require("urlparser");
+//var url = require("urlparser");
 
 var winston = require('winston');
 require('winston-daily-rotate-file');
-var fs = require('fs');
-var functions = require('../common/functions.js');
+//var fs = require('fs');
+var functions = require('../common/functions.server.js');
 
 //LOGGER//////////////////////////////////////////
 var logger = new (winston.Logger)({
@@ -23,9 +23,10 @@ var logger = new (winston.Logger)({
 /////////////////////////////////////////////////
 
 // Helper to validate email based on regex
-const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+var EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 /////////////////////////////////////////////////////
 function validateEmail (email) {
+	'use strict';
   if (typeof email === 'string' && email.length > 5 && email.length < 61 && EMAIL_REGEX.test(email)) {
     return email.toLowerCase();
   } else {
@@ -35,7 +36,7 @@ function validateEmail (email) {
 /////////////////////////////////////////////////////
 
 function UserHandler (emailServer) {
-	
+	'use strict';
 	var server 	= email.server.connect({
 		'user':    emailServer.user, 
 		'password': emailServer.password, 
@@ -69,20 +70,19 @@ function UserHandler (emailServer) {
 						/////////////Email send!!////////////////////
 						if(email != false){
 							
-						// send the message and get a callback with an error or details of the message that was sent 
-						//console.log(server);
-						server.send({
-						   text:    "Welcome to Clementine Pnald version!", 
-						   from:    "Admin <rblanco@gammaseafood.com>", 
-						   //to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
-						   to:      "New User <"+ email +">",
-						   //cc:      "else <else@your-email.com>",
-						   subject: "Welcome Email!"
-						}, function(err, message) { functions.logIt(logger, err || message)});
-						
+							// send the message and get a callback with an error or details of the message that was sent 
+							//console.log(server);
+							server.send({
+							text:    "Welcome to Clementine Pnald version!", 
+							from:    "Admin <rblanco@gammaseafood.com>", 
+							//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
+							to:      "New User <"+ email +">",
+							//cc:      "else <else@your-email.com>",
+							subject: "Welcome Email!"
+							}, function(err, message) { functions.logIt(logger, err || message); });               
 						}
 						////////////////////////////////
-						//res.send({'message':'User was created correctly!'});
+						
 						message.message = "The User was created correctly!";
 						message.type = "alert alert-success";
 						//res.send({});
@@ -116,15 +116,13 @@ function UserHandler (emailServer) {
 				// send the message and get a callback with an error or details of the message that was sent 
 				//console.log(server);
 				server.send({
-						text:    "Your new password is: "+newPass, 
-						from:    "Admin <rblanco@gammaseafood.com>", 
-						//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
-						to:      "New User <"+ username +">",
-						//cc:      "else <else@your-email.com>",
-						subject: "Your password was reset!"
-				}, function(err, message) { functions.logIt(logger, err || message) });
-				
-				//res.redirect('/auth/localnewok');
+					text:    "Your new password is: "+newPass, 
+					from:    "Admin <rblanco@gammaseafood.com>", 
+					//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
+					to:      "New User <"+ username +">",
+					//cc:      "else <else@your-email.com>",
+					subject: "Your password was reset!"
+				}, function(err, message) { functions.logIt(logger, err || message); });//res.redirect('/auth/localnewok');
 				message.message = "The password was reset correctly; an email was send to the user!";
 				message.type = "alert alert-success";
 				res.send({"message":"The password was reset correctly; an email was send to the user!"});

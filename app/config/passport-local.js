@@ -1,4 +1,4 @@
-'use strict';
+
 
 var localStrategy = require('passport-local').Strategy;
 var md5Hex = require('md5-hex');
@@ -8,6 +8,7 @@ var User = require('../models/users');
 //var configAuth = require('./auth');
 
 module.exports = function (passportLocal) {
+	'use strict';
 	// Configure the local strategy for use by Passport.
 	//
 	// The local strategy require a `verify` function which receives the credentials

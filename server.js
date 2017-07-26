@@ -12,7 +12,7 @@ var compression = require('compression');
 var winston = require('winston');
 require('winston-daily-rotate-file');
 var fs = require('fs');
-var functions = require('./app/common/functions.js');
+var functions = require('./app/common/functions.server.js');
 
 var app = express();
 
@@ -36,6 +36,7 @@ var emailServer = {
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use('/dist', express.static(process.cwd() + '/dist'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
 
 //////////////////////////////////////////////

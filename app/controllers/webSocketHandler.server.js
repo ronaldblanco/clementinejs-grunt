@@ -5,14 +5,14 @@ var config = require('../models/config.js');
 var numClients = 0;
 // Controller agrees to implement the function called "respond"
 
-function sendAdd(io){
+/*function sendAdd(io){
     io.emit('stats', { numClients: numClients, data: config }); 
     io.emit('broadcast', 'A new Stock was Add by a Client, please update the chart!');
 }
 function sendDel(io){
     io.emit('stats', { numClients: numClients, data: config }); 
     io.emit('broadcast', 'A Stock was remove by a Client, please update the chart!');
-}
+}*/
 
 module.exports.respond = function(endpoint,socket){
     

@@ -1,10 +1,11 @@
-'use strict';
+
 
 var GitHubStrategy = require('passport-github').Strategy;
 var User = require('../models/users');
-var configAuth = require('./auth');
+var configAuth = require('./auth')(process);
 
 module.exports = function (passport) {
+	'use strict';
 	passport.serializeUser(function (user, done) {
 		done(null, user.id);
 	});

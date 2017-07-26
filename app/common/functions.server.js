@@ -16,6 +16,7 @@ var logger = new (winston.Logger)({
     ]
   });
 function logIt (logger, info){
+  'use strict';
     logger.info(info);
 }
 //functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
@@ -24,10 +25,12 @@ function logIt (logger, info){
 module.exports = {
   
   logIt: function(logger, info){
+    'use strict';
     logger.info(info);
   },
   
   cacheIt: function(req, res, next) {
+    'use strict';
     logIt(logger,req.url);
     //console.log(req.url);
     //if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
@@ -47,10 +50,12 @@ module.exports = {
   
   //TESTS ONLY
   checkIt: function(req, res, next) {
+    'use strict';
     next();
   },
     
   ensureExists: function (path, mask, cb) {
+    'use strict';
     if (typeof mask == 'function') { // allow the `mask` parameter to be optional
         cb = mask;
         mask = '0777';
@@ -64,6 +69,7 @@ module.exports = {
   },
   
   shouldCompress: function (req, res) {
+    'use strict';
   if (req.headers['x-no-compression']) {
     // don't compress responses with this request header
     console.log(req.url+' not Compressed');

@@ -1,9 +1,9 @@
-'use strict';
+
 
 var Users = require('../models/users.js');
 
 function ClickHandler () {
-
+	'use strict';
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'login.id': req.user.login.id }, { '_id': false })

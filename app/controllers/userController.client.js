@@ -1,7 +1,7 @@
-'use strict';
+
 
 (function () {
-
+   'use strict';
    var login = document.querySelector('#login') || null;
    var create = document.querySelector('#create') || null;
    var reset = document.querySelector('#reset') || null;
