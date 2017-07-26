@@ -42,6 +42,17 @@ module.exports = function(grunt) {
       tasks: ['jshint', 'qunit']
     },
     
+    nodemon: {
+			dev: {
+				script: 'server.js',
+				options: {
+					nodeArgs: ['--debug'],
+					ext: 'js,html',
+					watch: ['app/view/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					ignore: ['node_modules/**']
+				}
+			}
+		},
     
     /*csslint: {
 			options: {
@@ -77,14 +88,10 @@ module.exports = function(grunt) {
   
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-nodemon');
   
-  grunt.registerTask('run-server', 'Start a custom web server', function() {
-    grunt.log.writeln('Started web server on port 8080');
-    require('./server.js').listen(8080);
-  });
-
   grunt.registerTask('test', [/*'jshint', 'qunit'*/]);
 
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'cssmin', 'nodemon']);
 
 };
