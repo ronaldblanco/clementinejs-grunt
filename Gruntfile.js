@@ -40,8 +40,19 @@ module.exports = function(grunt) {
     },
     
     qunit: {
-      files: ['test/**/*.html']
+      files: ['test/*.html']
     },
+    
+    /*qunit: {
+        all: {
+          options: {
+            urls: [
+              'https://clementinejs-pnaldblanco.c9users.io/login',
+              'https://clementinejs-pnaldblanco.c9users.io/',
+            ]
+          }
+        }
+    },*/
     
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
@@ -69,16 +80,16 @@ module.exports = function(grunt) {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
 					watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
-					ignore: ['node_modules/**']
+					ignore: ['node_modules/**','log/**']
 				}
 			},
 			production: {
 				script: 'server.js',
 				options: {
-					//nodeArgs: [''],
+					//nodeArgs: ['--debug'],
 					ext: 'js,html',
-					//watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
-					ignore: ['node_modules/**']
+					watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					ignore: ['node_modules/**','test/**','log/**','dist/**']
 				}
 			}
 		},
@@ -118,8 +129,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-nodemon');
   
-  grunt.registerTask('test', ['jshint', 'qunit']);
+  // Test all task(s).
+  grunt.registerTask('check-all', ['jshint', 'qunit']);
+  
+  // Test task(s).
+  grunt.registerTask('check', ['jshint']);
+  
+  // Build task(s).
+	grunt.registerTask('build', ['check','concat', 'uglify', 'cssmin']);
 
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify'/*, 'csslint'*/, 'cssmin', 'nodemon']);
+  // Default task(s).
+  grunt.registerTask('default', ['build', 'nodemon:dev']);
+  
+  // Production task(s).
+  grunt.registerTask('prod', ['build', 'nodemon:production']);
 
 };

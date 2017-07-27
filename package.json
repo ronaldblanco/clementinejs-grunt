@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "start": "grunt",
-    "test": "grunt test",
+    "test": "grunt check-all",
     "postinstall": "bower install --config.interactive=false",
     "heroku-postbuild": "grunt build"
   },
