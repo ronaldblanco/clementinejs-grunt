@@ -2,10 +2,10 @@
 
 (function () {
    'use strict';
-   var addButton = document.querySelector('#adddata');
-   var delButton = document.querySelector('#deldata');
-   var grid = document.querySelector('#list');
-   var name = document.querySelector('#name');
+   var addButton = document.querySelector('#adddata') || null;
+   var delButton = document.querySelector('#deldata') || null;
+   var grid = document.querySelector('#list') || null;
+   var name = document.querySelector('#name') || null;
    //var image = document.querySelector('#image');
    var apiUrl = appUrl + '/api/:id/info';
 
@@ -33,33 +33,40 @@
    }
 
    function updateGrid (data) {
-      var info = JSON.parse(data);
-      console.log(info.data);
-      grid.innerHTML = '';
-      for(var a = 0; a < info.data.length; a++){
-         grid.innerHTML = grid.innerHTML + '<li class="list-group-item '+colors1()+'"><input type="radio" value="?name=' +info.data[a].name+'" name="radioData" id="radioData'+a+'">'+info.data[a].name+'</li>';
+      if(data != null && data != undefined){
+         var info = JSON.parse(data);
+         console.log(info.data);
+         if(grid != null){
+            grid.innerHTML = '';
+            for(var a = 0; a < info.data.length; a++){
+               grid.innerHTML = grid.innerHTML + '<li class="list-group-item '+colors1()+'"><input type="radio" value="?name=' +info.data[a].name+'" name="radioData" id="radioData'+a+'">'+info.data[a].name+'</li>';
+            }
+         }
       }
-      
    }
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateGrid));
 
-   addButton.addEventListener('click', function () {
+   if(addButton != null){
+      addButton.addEventListener('click', function () {
 
-      var query = "?name=" + name.value;
-      ajaxFunctions.ajaxRequest('POST', apiUrl + 'add' + query, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateGrid);
-      });
+         var query = "?name=" + name.value;
+         ajaxFunctions.ajaxRequest('POST', apiUrl + 'add' + query, function () {
+            ajaxFunctions.ajaxRequest('GET', apiUrl, updateGrid);
+         });
 
-   }, false);
+      }, false);
+   }
 
-   delButton.addEventListener('click', function () {
+   if(delButton != null){
+      delButton.addEventListener('click', function () {
 
-      var query = document.querySelector('input[name = "radioData"]:checked').value;
-      ajaxFunctions.ajaxRequest('DELETE', apiUrl + 'del' + query, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateGrid);
-      });
+         var query = document.querySelector('input[name = "radioData"]:checked').value;
+         ajaxFunctions.ajaxRequest('DELETE', apiUrl + 'del' + query, function () {
+            ajaxFunctions.ajaxRequest('GET', apiUrl, updateGrid);
+         });
 
-   }, false);
+      }, false);
+   }
    
 })();

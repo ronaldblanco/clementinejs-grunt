@@ -2,28 +2,47 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    
     concat: {
       options: {
         separator: ';'
       },
       dist: {
         src: ['app/common/ajax-functions.js','app/controllers/*.client.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/js/<%= pkg.name %>.js'
+      },
+      profile: {
+        src: ['app/common/ajax-functions.js','app/controllers/profileController.client.js'],
+        dest: 'dist/js/profile.<%= pkg.name %>.js'
+      },
+      userlocal: {
+        src: ['app/common/ajax-functions.js','app/controllers/userController.client.js'],
+        dest: 'dist/js/user.<%= pkg.name %>.js'
+      },
+      index: {
+        src: ['app/common/ajax-functions.js','app/controllers/clickController.client.js','app/controllers/dataController.client.js','app/controllers/profileController.client.js'],
+        dest: 'dist/js/index.<%= pkg.name %>.js'
       }
     },
+    
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>'],
+          'dist/js/profile.<%= pkg.name %>.min.js': ['<%= concat.profile.dest %>'],
+          'dist/js/user.<%= pkg.name %>.min.js': ['<%= concat.userlocal.dest %>'],
+          'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>']
         }
       }
     },
+    
     qunit: {
       files: ['test/**/*.html']
     },
+    
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
       options: {
@@ -37,6 +56,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    
     watch: {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint', 'qunit']
@@ -48,31 +68,39 @@ module.exports = function(grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: ['app/view/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					ignore: ['node_modules/**']
+				}
+			},
+			production: {
+				script: 'server.js',
+				options: {
+					//nodeArgs: [''],
+					ext: 'js,html',
+					//watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
 					ignore: ['node_modules/**']
 				}
 			}
 		},
     
-    /*csslint: {
+    csslint: {
 			options: {
 				csslintrc: '.csslintrc'
 			},
 			dist: {
-				src: ['app/view/css/*.css'],
-				dest: 'dist/<%= pkg.name %>.css'
+				src: ['public/css/*.css'],
+				dest: 'dist/css/<%= pkg.name %>.css'
 			}
-		},*/
-    
-    
+		},
+
     cssmin: {
       options: {
         banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
       },
       build: {
         files: {
-          'dist/main.min.css': 'app/view/css/main.css',
-          'dist/w3.min.css': 'app/view/css/w3.css'
+          'dist/css/main.min.css': 'public/css/main.css',
+          'dist/css/w3.min.css': 'public/css/w3.css'
         }
       }
     }
@@ -90,8 +118,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-nodemon');
   
-  grunt.registerTask('test', [/*'jshint', 'qunit'*/]);
+  grunt.registerTask('test', ['jshint', 'qunit']);
 
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'cssmin', 'nodemon']);
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify'/*, 'csslint'*/, 'cssmin', 'nodemon']);
 
 };
