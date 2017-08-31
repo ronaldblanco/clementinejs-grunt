@@ -5,11 +5,11 @@
 ## Overview
 
 The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements:<br>
-GRUNT Ready version of Clementinejs
-    ---grunt or npm start to run the app
-    ---grunt check-all or npm test to run tests on the app
-    ---grunt build to build the app
-    ---All files went modifyed following good practices
+GRUNT Ready version of Clementinejs<br>
+    ---grunt or npm start to run the app<br>
+    ---grunt check-all or npm test to run tests on the app<br>
+    ---grunt build to build the app<br>
+    ---All files went modifyed following good practices<br>
 Added Jquery<br>
 Added Bootstrap<br>
 Added w3.css responsive<br>
