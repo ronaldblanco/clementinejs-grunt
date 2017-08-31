@@ -2,3 +2,6 @@ node_modules/
 .eslintrc
 .env
 log/
+public/
+dist/css/
+dist/js/
