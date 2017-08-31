@@ -68,11 +68,11 @@ module.exports = function(grunt) {
 		},
     
     csslint: {
-			options: {
+			/*options: {
 				csslintrc: '.csslintrc'
-			},
+			},*/
 			dist: {
-				src: ['public/css/*.css'],
+				src: ['app/views/css/main.css'/*, 'app/views/css/*.css'*/],
 				dest: 'dist/css/<%= pkg.name %>.css'
 			}
 		},
@@ -106,13 +106,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   
   // Test all task(s).
-  grunt.registerTask('check-all', ['jshint', 'qunit']);
+  grunt.registerTask('check-all', ['jshint', 'csslint']);
   
   // Test task(s).
-  grunt.registerTask('check', ['jshint']);
+  grunt.registerTask('check', ['jshint', 'csslint']);
   
   // Build task(s).
-	grunt.registerTask('build', ['check','concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	grunt.registerTask('build', ['check-all', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 
   // Default task(s).
   grunt.registerTask('default', ['build', 'nodemon:development']);
@@ -121,6 +121,6 @@ module.exports = function(grunt) {
   grunt.registerTask('production', ['build', 'nodemon:production']);
   
   // Development task(s).
-  grunt.registerTask('development', ['check-all', 'build', 'nodemon:development']);
+  grunt.registerTask('development', ['build', 'nodemon:development']);
 
 };

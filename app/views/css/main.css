@@ -4,14 +4,24 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url('../../public/fonts/Roboto-Regular.ttf') format('truetype');
+  src: /*local('Roboto'), 
+  	local('Roboto-Regular'),*/
+  	url('Roboto-Regular.eot?#iefix') format('embedded-opentype'), 
+	url('Roboto-Regular.woff') format('woff'),
+  	url('../../dist/fonts/Roboto-Regular.ttf') format('truetype'),
+  	url('Roboto-Regular.svg#svgFontName') format('svg');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url('../../public/fonts/Roboto-Medium.ttf') format('truetype');
+  src: /*local('Roboto Medium'), 
+  	local('Roboto-Medium'), */
+  	url('Roboto-Medium.eot?#iefix') format('embedded-opentype'), 
+	url('Roboto-Medium.woff') format('woff'),
+  	url('../../dist/fonts/Roboto-Medium.ttf') format('truetype'),
+  	url('Roboto-Medium.svg#svgFontName') format('svg');
 }
 
 /****** Main Styling ******/
@@ -35,19 +45,17 @@ p {
 }
 
 .container p {
-	text-align: center;
 	padding: 0;
-	
+	text-align: center;
 }
 
-.resp{
-	/*float: left;*/
+.resp {
+	border: 1px solid black;
 	float: left;
-   margin: 10px;
-   padding: 10px;
-   max-width: 320px;
-   height: auto;
-   border: 1px solid black;
+	height: auto;
+   	margin: 10px;
+   	max-width: 320px;
+   	padding: 10px;
 }
 
 /****** Header Styling ******/
@@ -57,10 +65,10 @@ header p {
 }
 
 .menu {
-	text-decoration: none;
-	padding: 6px;
-	margin: 0;
 	color: #727272;
+	margin: 0;
+	padding: 6px;
+	text-decoration: none;
 }
 
 .menu:visited {
@@ -76,10 +84,10 @@ header p {
 }
 
 header a ~ p {
-	margin: 0;
-	padding: 0;
-	display: inline;
+	/*margin: 0;*/
 	color: #ECEFF1;
+	display: inline;
+	padding: 0;
 }
 
 #display-name {
@@ -94,8 +102,8 @@ header a ~ p {
 }
 
 #login-btn {
-	width: 225px;
 	padding: 7px 5px;
+	width: 225px;
 }
 
 .btn p {
@@ -111,16 +119,16 @@ header a ~ p {
 /****** Logo Div Styling ******/
 
 img {
-	margin: 0 auto;
 	display: block;
+	margin: 0 auto;
 }
 
 .clementine-text { /* Styling for the Clementine.js text */
-	padding: 0;
-	margin: -25px 0 0 0;
-	font-weight: 500;
-	font-size: 50px; /*60px;*/
 	color: #FFA000;
+	font-size: 50px; /*60px;*/
+	font-weight: 500;
+	margin: -25px 0 0 0;
+	padding: 0;
 }
 
 /****** Click Styling ******/
@@ -131,16 +139,16 @@ img {
 }
 
 .btn {	/* Styling for buttons */
-	margin: 0 8px;
-	color: white;
 	background-color: #00BCD4;
-	display: inline-block;
 	border: 0;
-	font-size: 14px;
 	border-radius: 3px;
-	padding: 10px 5px;
-	width: 100px;
+	color: white;
+	display: inline-block;
+	font-size: 14px;
 	font-weight: 500;
+	margin: 0 8px;
+	padding: 10px 5px;
+	/*width: 100px;*/
 }
 
 .btn:focus {	/* Remove outline when hovering over button */
@@ -148,9 +156,11 @@ img {
 }
 
 .btn:active {	/* Scale the button down by 10% when clicking on button */
-	transform: scale(0.9, 0.9);
-	-webkit-transform: scale(0.9, 0.9);
+	-o-transform: scale(0.9, 0.9);
+	-ms-transform: scale(0.9, 0.9);
 	-moz-transform: scale(0.9, 0.9);
+	-webkit-transform: scale(0.9, 0.9);
+	transform: scale(0.9, 0.9);
 }
 
 .btn-delete {	/* Styling for delete button */
@@ -165,13 +175,13 @@ img {
 /****** Profile Styling ******/
 
 .github-profile {
-	width: 350px;
-	height: 200px;
-	border-radius: 3px;
-	margin: 86px auto 0 auto;
 	background-color: #EEE;
-	text-align: center;
+	border-radius: 3px;
 	color: #000;
+	height: 200px;
+	margin: 86px auto 0 auto;
+	text-align: center;
+	width: 350px;
 }
 
 .github-profile p:first-child {
@@ -196,8 +206,8 @@ span {
 }
 
 .github-profile > img {
-	padding-top: 16px;
 	margin-bottom: 16px;
+	padding-top: 16px;
 }
 
 .github-profile .menu:hover {
@@ -211,5 +221,5 @@ span {
 #menu-divide {
 	color: #FFFFFF;
 	display: inline;
-	margin: 0;
+	/*margin: 0;*/
 }
