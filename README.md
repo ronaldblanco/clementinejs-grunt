@@ -1,10 +1,15 @@
-# Clementine.js FCC Boilerplate pnald version
+# Clementine.js FCC Boilerplate pnald GRUNT version
 
 [![Join the chat at https://gitter.im/johnstonbl01/clementinejs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/johnstonbl01/clementinejs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Overview
 
-The pnald version is a personalized version of Clementine.js FCC with a couple improvements:<br>
+The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements:<br>
+GRUNT Ready version of Clementinejs
+    ---grunt or npm start to run the app
+    ---grunt check-all or npm test to run tests on the app
+    ---grunt build to build the app
+    ---All files went modifyed following good practices
 Added Jquery<br>
 Added Bootstrap<br>
 Added w3.css responsive<br>

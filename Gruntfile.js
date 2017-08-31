@@ -106,13 +106,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   
   // Test all task(s).
-  grunt.registerTask('check-all', ['jshint', 'csslint']);
+  grunt.registerTask('check-all', ['jshint', 'csslint', 'qunit']);
   
   // Test task(s).
   grunt.registerTask('check', ['jshint', 'csslint']);
   
   // Build task(s).
-	grunt.registerTask('build', ['check-all', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	grunt.registerTask('build', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 
   // Default task(s).
   grunt.registerTask('default', ['build', 'nodemon:development']);
