@@ -113,9 +113,15 @@ module.exports = function(grunt) {
   
   // Build task(s).
 	grunt.registerTask('build', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	
+	// Build task(s).
+	//grunt.registerTask('builddev', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 
   // Default task(s).
   grunt.registerTask('default', ['build', 'nodemon:development']);
+  
+  // Default task(s).
+  grunt.registerTask('run', ['nodemon:development']);
   
   // Production task(s).
   grunt.registerTask('production', ['build', 'nodemon:production']);

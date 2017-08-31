@@ -1,5 +1,5 @@
 module.exports = {
-        login: {
+    login: {
             src: 'app/views/template/base.html',
             dest: 'public/login.html',
             options: {
@@ -36,7 +36,7 @@ module.exports = {
                 },
             }
         },
-        index: {
+    index: {
             src: 'app/views/template/base.html',
             dest: 'public/index.html',
             options: {
@@ -46,7 +46,7 @@ module.exports = {
                 basePath: false,
                 scripts: {
                     bundle: [
-                        //'<%= fixturesPath %>/js/*.js',
+                        "<%= fixturesPath %>/js/index.<%= pkg.name %>.min.js"
                         //'<%= fixturesPath %>/*.js',
                         //'!**/main.js'
                     ],
@@ -73,7 +73,7 @@ module.exports = {
                 },
             }
         },
-        profile: {
+    profile: {
             src: 'app/views/template/base.html',
             dest: 'public/profile.html',
             options: {
@@ -83,7 +83,7 @@ module.exports = {
                 basePath: false,
                 scripts: {
                     bundle: [
-                        //'<%= fixturesPath %>/js/*.js',
+                        "<%= fixturesPath %>/js/profile.<%= pkg.name %>.min.js"
                         //'<%= fixturesPath %>/*.js',
                         //'!**/main.js'
                     ],
@@ -110,7 +110,7 @@ module.exports = {
                 },
             }
         },
-        loginlocal: {
+    loginlocal: {
             src: 'app/views/template/base.html',
             dest: 'public/loginlocal.html',
             options: {
@@ -120,7 +120,7 @@ module.exports = {
                 basePath: false,
                 scripts: {
                     bundle: [
-                        //'<%= fixturesPath %>/js/*.js',
+                        "<%= fixturesPath %>/js/user.<%= pkg.name %>.min.js"
                         //'<%= fixturesPath %>/*.js',
                         //'!**/main.js'
                     ],
@@ -147,7 +147,7 @@ module.exports = {
                 },
             }
         },
-        usercreationOK: {
+    usercreationOK: {
             src: 'app/views/template/base.html',
             dest: 'public/usercreationOK.html',
             options: {
@@ -184,4 +184,4 @@ module.exports = {
                 },
             }
         }
-    };
+};
