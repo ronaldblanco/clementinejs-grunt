@@ -1,72 +1,48 @@
+<!DOCTYPE html>
+
 <html>
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Clementinejs</title>
-    <!--Always force latest IE rendering engine (even in intranet) & Chrome Frame Remove this if you use the .htaccess-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Clementinejs" />
-    <meta name="author" content="Ronald" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		
+    <div id="includedHead"></div>
+	</head>
 
-    <link type="text/css" rel="stylesheet" href="../dist/css/main.min.css" />
-    <link type="text/css" rel="stylesheet" href="../dist/css/w3.min.css" />
-    <style></style>
-
-    <link rel="stylesheet" href="/dist/bootstrap.min.css" />
-    <link rel="stylesheet" href="/dist/font-awesome.min.css" />
-</head>
-
-<body id="landing-page">
-
-
-    <body>
-        <div class="container">
-            <div class="github-profile">
-                <!--<img src="/public/img/gh-mark-32px.png" alt="github logo" />-->
-                <div id="photoId"></div>
-                <p><span>ID: </span><span id="profile-id" class="profile-value"></span></p>
-                <p><span>Username: </span><span id="profile-username" class="profile-value"></span></p>
-                <p><span>Display Name: </span><span id="display-name" class="profile-value"></span></p>
-                <!--<p><span>Repositories: </span><span id="profile-repos" class="profile-value"></span></p>-->
-                <div id="repo"></div>
-                <a class="menu" href="/">Home</a>
-                <p id="menu-divide">|</p>
-                <a class="menu" href="/logout">Logout</a>
-            </div>
-        </div>
-
-        <script type="text/javascript" src="/dist/js/profile.clementinejs-fcc-pnald.min.js"></script>
-
-
-
-
-
-
-        <script type="text/javascript" src="/path/analytics.js"></script>
-
-
-
-
-        <script type="text/javascript">
-            var version = "0.1.0",
-                title = "profile";
-        </script>
-
-        <script type="text/javascript"></script>
-        <script type="text/javascript"></script>
-
-
-
-        <center>
-            <br>
-            <p>Created by Ronald Blanco using clementine.js.</p>
-            <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-            <script src="/dist/bootstrap.min.js"></script>
-            <script src="/dist/jquery-2.2.4.min.js"></script>
-            <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.0.0.js"></script>
-        </center>
-
-    </body>
+	<body>
+		<div class="container">
+			<div class="github-profile">
+				<!--<img src="/public/img/gh-mark-32px.png" alt="github logo" />-->
+				<div id = "photoId"></div>
+				<p><span>ID: </span><span id="profile-id" class="profile-value"></span></p>
+				<p><span>Username: </span><span id="profile-username" class="profile-value"></span></p>
+				<p><span>Display Name: </span><span id="display-name" class="profile-value"></span></p>
+				<!--<p><span>Repositories: </span><span id="profile-repos" class="profile-value"></span></p>-->
+				<div id = "repo"></div>
+				<a class="menu" href="/">Home</a>
+				<p id="menu-divide">|</p>
+				<a class="menu" href="/logout">Logout</a>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="/dist/js/profile.clementinejs-fcc-pnald.min.js"></script>
+		<!--<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/profileController.client.js"></script>-->
+		
+		<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
+		<script src="/dist/jquery-2.2.4.min.js"></script>
+		<script> 
+    	$(function(){
+      	$("#includedHead").load("/public/head.html"); 
+    	});
+    </script> 
+    <script> 
+    	$(function(){
+      	$("#includedFoot").load("/public/foot.html"); 
+    	});
+    </script> 
+		
+		<center>
+			<div id="includedFoot"></div>
+		</center>
+	</body>
 
 </html>
