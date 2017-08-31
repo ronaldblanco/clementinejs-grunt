@@ -8,7 +8,7 @@ var transport= new winston.transports.DailyRotateFile({
     filename: './log/log',
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
-    level: process.env.ENV === 'development' ? 'debug' : 'info'
+    level: process.env.NODE_ENV === 'development' ? 'debug' : 'info'
   });
 var logger = new (winston.Logger)({
     transports: [
@@ -31,7 +31,7 @@ module.exports = {
   
   cacheIt: function(req, res, next) {
     'use strict';
-    logIt(logger,req.url);
+    if (process.env.NODE_ENV === 'development') logIt(logger,req.url);
     //console.log(req.url);
     //if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
         //res.set('Cache-Control', 'public, max-age=3600');
@@ -84,7 +84,7 @@ module.exports = {
     filename: './log/log',
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
-    level: process.env.ENV === 'development' ? 'debug' : 'info'
+    level: process.env.NODE_ENV === 'development' ? 'debug' : 'info'
   }),
   
 };

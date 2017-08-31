@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		
+    <div id="includedHead"></div>
+	</head>
+	
+	<header>
+		<div class="w3-container">
+			<a class="menu" href="/">LOGIN PAGE</a>
+			<p>|</p>
+			<a class="menu" href="/authlocal">BACK</a>
+			<div class="" id="message"></div>
+			<div class="alert alert-info"><h2>User Created correctly or in database! You can login!</h2></div>
+		</div>
+		</header>
+
+	<body>
+		<div class="w3-container">	
+		
+		
+<form action="/auth/local" method="post">
+	<h3>LOGIN LOCAL USER</h3>
+	<div class="form-group">
+	<div>
+	<label>Username:</label>
+	<input type="text" name="username"class="form-control" placeholder="Username or Email"/><br/>
+	</div>
+	<div>
+	<label>Password:</label>
+	<input type="password" name="password" class="form-control" placeholder="Password"/>
+	</div>
+	</div>
+	<br>
+	<div class="form-group">
+	<div>
+	<input type="submit" class="btn btn-primary" value="Submit"/>
+	</div>
+	</div>
+</form>
+		</div>
+		
+		
+		<!--<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>-->
+		
+		<!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
+		<script src="/dist/jquery-2.2.4.min.js"></script>
+		<script> 
+    	$(function(){
+      	$("#includedHead").load("/public/head.html"); 
+    	});
+    </script> 
+    <script> 
+    	$(function(){
+      	$("#includedFoot").load("/public/foot.html"); 
+    	});
+    </script> 
+		
+		<center>
+			<div id="includedFoot"></div>
+		</center>
+	</body>
+
+</html>

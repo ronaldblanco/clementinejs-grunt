@@ -8,7 +8,7 @@ var UserHandler = require(path + '/app/controllers/userHandler.server.js');
 //var Promise = require('bluebird');
 
 module.exports = function (app, passport, passportTwitter, passportLocal, emailServer) {
-	'use strict';
+	
 	function isLoggedIn (req, res, next) {
 		//console.log(req.user);
 		if (req.isAuthenticated()) {

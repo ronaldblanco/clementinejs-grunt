@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    
     pkg: grunt.file.readJSON('package.json'),
     
     concat: {
@@ -24,7 +25,7 @@ module.exports = function(grunt) {
         dest: 'dist/js/index.<%= pkg.name %>.js'
       }
     },
-    
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -40,19 +41,8 @@ module.exports = function(grunt) {
     },
     
     qunit: {
-      files: ['test/*.html']
+      files: ['public/*.html']
     },
-    
-    /*qunit: {
-        all: {
-          options: {
-            urls: [
-              'https://clementinejs-pnaldblanco.c9users.io/login',
-              'https://clementinejs-pnaldblanco.c9users.io/',
-            ]
-          }
-        }
-    },*/
     
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js'],
@@ -74,7 +64,7 @@ module.exports = function(grunt) {
     },
     
     nodemon: {
-			dev: {
+			development: {
 				script: 'server.js',
 				options: {
 					nodeArgs: ['--debug'],
@@ -87,9 +77,9 @@ module.exports = function(grunt) {
 				script: 'server.js',
 				options: {
 					//nodeArgs: ['--debug'],
-					ext: 'js,html',
-					watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
-					ignore: ['node_modules/**','test/**','log/**','dist/**']
+					ext: 'js,html'//,
+					//watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					//ignore: ['node_modules/**','test/**','log/**','dist/**']
 				}
 			}
 		},
@@ -114,9 +104,197 @@ module.exports = function(grunt) {
           'dist/css/w3.min.css': 'public/css/w3.css'
         }
       }
+    },
+
+    fixturesPath: "dist",
+    htmlbuild: {
+        login: {
+            src: 'app/views/template/base.html',
+            dest: 'public/login.html',
+            options: {
+                beautify: true,
+                prefix: '',
+                relative: true,
+                basePath: false,
+                scripts: {
+                    bundle: [
+                        //'<%= fixturesPath %>/js/*.js',
+                        //'<%= fixturesPath %>/*.js',
+                        //'!**/main.js'
+                    ],
+                    main: '<%= fixturesPath %>/js/main.js'
+                },
+                styles: {
+                    bundle: [
+                        '<%= fixturesPath %>/css/*.css'
+                    ],
+                    test: '<%= fixturesPath %>/css/inline.css'
+                },
+                sections: {
+                    views: 'app/views/login.html',
+                    //templates: '<%= fixturesPath %>/templates/**/*.html',
+                    layout: {
+                        header: 'app/views/layout/head.html',
+                        footer: 'app/views/layout/foot.html'
+                    }
+                },
+                data: {
+                    // Data to pass to templates
+                    version: "0.1.0",
+                    title: "login",
+                },
+            }
+        },
+        index: {
+            src: 'app/views/template/base.html',
+            dest: 'public/index.html',
+            options: {
+                beautify: true,
+                prefix: '',
+                relative: true,
+                basePath: false,
+                scripts: {
+                    bundle: [
+                        //'<%= fixturesPath %>/js/*.js',
+                        //'<%= fixturesPath %>/*.js',
+                        //'!**/main.js'
+                    ],
+                    main: '<%= fixturesPath %>/js/main.js'
+                },
+                styles: {
+                    bundle: [
+                        '<%= fixturesPath %>/css/*.css'
+                    ],
+                    test: '<%= fixturesPath %>/css/inline.css'
+                },
+                sections: {
+                    views: 'app/views/index.html',
+                    //templates: '<%= fixturesPath %>/templates/**/*.html',
+                    layout: {
+                        header: 'app/views/layout/head.html',
+                        footer: 'app/views/layout/foot.html'
+                    }
+                },
+                data: {
+                    // Data to pass to templates
+                    version: "0.1.0",
+                    title: "index",
+                },
+            }
+        },
+        profile: {
+            src: 'app/views/template/base.html',
+            dest: 'public/profile.html',
+            options: {
+                beautify: true,
+                prefix: '',
+                relative: true,
+                basePath: false,
+                scripts: {
+                    bundle: [
+                        //'<%= fixturesPath %>/js/*.js',
+                        //'<%= fixturesPath %>/*.js',
+                        //'!**/main.js'
+                    ],
+                    main: '<%= fixturesPath %>/js/main.js'
+                },
+                styles: {
+                    bundle: [
+                        '<%= fixturesPath %>/css/*.css'
+                    ],
+                    test: '<%= fixturesPath %>/css/inline.css'
+                },
+                sections: {
+                    views: 'app/views/profile.html',
+                    //templates: '<%= fixturesPath %>/templates/**/*.html',
+                    layout: {
+                        header: 'app/views/layout/head.html',
+                        footer: 'app/views/layout/foot.html'
+                    }
+                },
+                data: {
+                    // Data to pass to templates
+                    version: "0.1.0",
+                    title: "profile",
+                },
+            }
+        },
+        loginlocal: {
+            src: 'app/views/template/base.html',
+            dest: 'public/loginlocal.html',
+            options: {
+                beautify: true,
+                prefix: '',
+                relative: true,
+                basePath: false,
+                scripts: {
+                    bundle: [
+                        //'<%= fixturesPath %>/js/*.js',
+                        //'<%= fixturesPath %>/*.js',
+                        //'!**/main.js'
+                    ],
+                    main: '<%= fixturesPath %>/js/main.js'
+                },
+                styles: {
+                    bundle: [
+                        '<%= fixturesPath %>/css/*.css'
+                    ],
+                    test: '<%= fixturesPath %>/css/inline.css'
+                },
+                sections: {
+                    views: 'app/views/loginlocal.html',
+                    //templates: '<%= fixturesPath %>/templates/**/*.html',
+                    layout: {
+                        header: 'app/views/layout/head.html',
+                        footer: 'app/views/layout/foot.html'
+                    }
+                },
+                data: {
+                    // Data to pass to templates
+                    version: "0.1.0",
+                    title: "loginlocal",
+                },
+            }
+        },
+        usercreationOK: {
+            src: 'app/views/template/base.html',
+            dest: 'public/usercreationOK.html',
+            options: {
+                beautify: true,
+                prefix: '',
+                relative: true,
+                basePath: false,
+                scripts: {
+                    bundle: [
+                        //'<%= fixturesPath %>/js/*.js',
+                        //'<%= fixturesPath %>/*.js',
+                        //'!**/main.js'
+                    ],
+                    main: '<%= fixturesPath %>/js/main.js'
+                },
+                styles: {
+                    bundle: [
+                        '<%= fixturesPath %>/css/*.css'
+                    ],
+                    test: '<%= fixturesPath %>/css/inline.css'
+                },
+                sections: {
+                    views: 'app/views/usercreationOK.html',
+                    //templates: '<%= fixturesPath %>/templates/**/*.html',
+                    layout: {
+                        header: 'app/views/layout/head.html',
+                        footer: 'app/views/layout/foot.html'
+                    }
+                },
+                data: {
+                    // Data to pass to templates
+                    version: "0.1.0",
+                    title: "usercreationOK",
+                },
+            }
+        }
     }
-    
-    
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -124,6 +302,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-html-build');
   
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -136,12 +315,15 @@ module.exports = function(grunt) {
   grunt.registerTask('check', ['jshint']);
   
   // Build task(s).
-	grunt.registerTask('build', ['check','concat', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['check','concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 
   // Default task(s).
-  grunt.registerTask('default', ['build', 'nodemon:dev']);
+  grunt.registerTask('default', ['build', 'nodemon:development']);
   
   // Production task(s).
-  grunt.registerTask('prod', ['build', 'nodemon:production']);
+  grunt.registerTask('production', ['build', 'nodemon:production']);
+  
+  // Development task(s).
+  grunt.registerTask('development', ['check-all', 'build', 'nodemon:development']);
 
 };

@@ -53,6 +53,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+if (process.env.NODE_ENV === 'development'){
 //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
 functions.ensureExists(__dirname + '/log', '0744', function(err) {
     if (err) console.error(err);
@@ -68,6 +69,7 @@ var logger = new (winston.Logger)({
   });
 functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
+}
 
 //Forzing Cache of static/////////////////////////
 app.use(functions.cacheIt);
@@ -102,4 +104,5 @@ var endpoint = io
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
+	console.log(process.env.NODE_ENV + ' ENV!');
 });
