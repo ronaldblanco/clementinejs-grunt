@@ -83,8 +83,8 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'dist/css/main.min.css': 'public/css/main.css',
-          'dist/css/w3.min.css': 'public/css/w3.css'
+          'dist/css/main.min.css': 'app/views/css/main.css',
+          'dist/css/w3.min.css': 'app/views/css/w3.css'
         }
       }
     },

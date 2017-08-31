@@ -102,7 +102,7 @@ var ajaxFunctions = {
    function updateGrid (data) {
       if(data != null && data != undefined){
          var info = JSON.parse(data);
-         console.log(info.data);
+         //console.log(info.data);
          if(grid != null){
             grid.innerHTML = '';
             for(var a = 0; a < info.data.length; a++){
@@ -184,7 +184,7 @@ var ajaxFunctions = {
             photoId.innerHTML =  '<img src='+userObject.photo+' class = "img-rounded">';
          }
       } else if(userObject.photo === undefined && photoId !== null) {
-         photoId.innerHTML =  '<img src="/public/img/gh-mark-32px.png" alt="github logo" />';
+         photoId.innerHTML =  '<img src="/dist/img/gh-mark-32px.png" alt="github logo" />';
       }
       
 

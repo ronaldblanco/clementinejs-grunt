@@ -35,7 +35,7 @@
    function updateGrid (data) {
       if(data != null && data != undefined){
          var info = JSON.parse(data);
-         console.log(info.data);
+         //console.log(info.data);
          if(grid != null){
             grid.innerHTML = '';
             for(var a = 0; a < info.data.length; a++){
