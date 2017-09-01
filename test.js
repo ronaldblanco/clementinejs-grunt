@@ -185,7 +185,26 @@ dev: {
         }
     },
 
-
+css: {
+        files: ['app/views/css/*.css'],
+        tasks: ['cssmin']
+      },
+      js: {
+        files: ['app/**/*.js'],
+        tasks: ['concat', 'uglify']
+      },
+      html: {
+        files: ['app/views/**/*.html'],
+        tasks: ['htmlbuild']
+      }
+      
+      options: {
+      livereload: true,
+      event: ['all']
+      },
+      
+      files: ['<%= jshint.files %>', '<%= concat.files %>', '<%= cssmin.files %>', '<%= htmlbuild.files %>'],
+      tasks: ['build']
 var email 	= require("./node_modules/emailjs/email");
 var server 	= email.server.connect({
    user:    "", 

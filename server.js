@@ -52,42 +52,26 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-/*
-//CHECK FOLDER PUBLIC AND CREATE IT////////////////////////////////////
-functions.ensureExists(__dirname + '/public', '0744', function(err) {
-    if (err) console.error(err);
-    else console.log('Folder Public was created or existed');
-});
-//////////////////////////////////////////////////
-//CHECK FOLDER /dist/css AND CREATE IT////////////////////////////////////
-functions.ensureExists(__dirname + '/dist/css', '0744', function(err) {
-    if (err) console.error(err);
-    else console.log('Folder /dist/css was created or existed');
-});
-//////////////////////////////////////////////////
-//CHECK FOLDER /dist/js AND CREATE IT////////////////////////////////////
-functions.ensureExists(__dirname + '/dist/js', '0744', function(err) {
-    if (err) console.error(err);
-    else console.log('Folder /dist/js was created or existed');
-});
-//////////////////////////////////////////////////
-*/
-if (process.env.NODE_ENV === 'development'){
-//CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
-functions.ensureExists(__dirname + '/log', '0744', function(err) {
-    if (err) console.error(err);
-    else console.log('Folder Log was created or existed');
-});
-//////////////////////////////////////////////////
 
-//LOGGER//////////////////////////////////////////
-var logger = new (winston.Logger)({
-    transports: [
-      functions.transport
-    ]
-  });
-functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
-/////////////////////////////////////////////////
+if (process.env.NODE_ENV === 'development'){
+    //Grunt build execution
+    functions.execute('grunt build');
+    /////////////////////////
+    //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
+    functions.ensureExists(__dirname + '/log', '0744', function(err) {
+        if (err) console.error(err);
+        else console.log('Folder Log was created or existed');
+    });
+    //////////////////////////////////////////////////
+
+    //LOGGER//////////////////////////////////////////
+    var logger = new (winston.Logger)({
+        transports: [
+        functions.transport
+        ]
+    });
+    functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
+    /////////////////////////////////////////////////
 }
 
 //Forzing Cache of static/////////////////////////

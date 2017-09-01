@@ -4,7 +4,9 @@ var winston = require('winston');
   require('winston-daily-rotate-file');
 var rimraf = require('rimraf');
 
-//LOGGER//////////////////////////////////////////
+var exec = require('child_process');
+
+//LOGGER///////////////////////////////////////////
 var transport= new winston.transports.DailyRotateFile({
     filename: './log/log',
     datePattern: 'yyyy-MM-dd.',
@@ -24,6 +26,20 @@ function logIt (logger, info){
 /////////////////////////////////////////////////
 
 module.exports = {
+  
+  execute: function(cmd){
+    exec.exec(cmd, function (err, stdout, stderr) {
+      if (err) {
+        console.log(cmd + ' was not execute!');
+        return;
+      }
+
+      // the *entire* stdout and stderr (buffered)
+      console.log(cmd + ' was execute!');
+      //console.log('stdout: ' + stdout);
+      if(stderr) console.log('stderr: ' + stderr);
+    });
+  },
   
   logIt: function(logger, info){
     'use strict';

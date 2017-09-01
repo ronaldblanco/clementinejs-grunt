@@ -41,15 +41,6 @@ module.exports = function(grunt) {
       }
     },
     
-    watch: {
-      options: {
-      livereload: true,
-      event: ['all']
-      },
-      files: ['<%= jshint.files %>', '<%= concat.files %>', '<%= cssmin.files %>', '<%= htmlbuild.files %>'],
-      tasks: ['jshint', 'concat', 'cssmin', 'htmlbuild']
-    },
-    
     nodemon: {
 			development: {
 				script: 'server.js',
@@ -107,7 +98,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  //grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-html-build');
   grunt.loadNpmTasks('grunt-execute');
@@ -135,7 +126,7 @@ module.exports = function(grunt) {
   grunt.registerTask('run-dev', ['nodemon:development']);
   
   // Watch task(s).
-  grunt.registerTask('watch', ['watch']);
+  //grunt.registerTask('watch', ['watch']);
   
   // Clean task(s).
   grunt.registerTask('clean', ['execute:clean']);
