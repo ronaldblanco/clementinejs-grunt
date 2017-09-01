@@ -11,7 +11,7 @@ var session = require('express-session');
 var compression = require('compression');
 var winston = require('winston');
 require('winston-daily-rotate-file');
-var fs = require('fs');
+//var fs = require('fs');
 var functions = require('./app/common/functions.server.js');
 
 var app = express();
@@ -52,7 +52,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+/*
 //CHECK FOLDER PUBLIC AND CREATE IT////////////////////////////////////
 functions.ensureExists(__dirname + '/public', '0744', function(err) {
     if (err) console.error(err);
@@ -71,7 +71,7 @@ functions.ensureExists(__dirname + '/dist/js', '0744', function(err) {
     else console.log('Folder /dist/js was created or existed');
 });
 //////////////////////////////////////////////////
-
+*/
 if (process.env.NODE_ENV === 'development'){
 //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
 functions.ensureExists(__dirname + '/log', '0744', function(err) {

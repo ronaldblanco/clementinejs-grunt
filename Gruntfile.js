@@ -63,13 +63,19 @@ module.exports = function(grunt) {
 			production: {
 				script: 'server.js',
 				options: {
-					//nodeArgs: ['--debug'],
-					ext: 'js,html'//,
-					//watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
-					//ignore: ['node_modules/**','test/**','log/**','dist/**']
+					ext: 'js,html'
 				}
 			}
 		},
+		
+		execute: {
+        build: {
+            src: ['build.js']
+        },
+        clean: {
+            src: ['clean.js']
+        }
+    },
     
     csslint: {
 			/*options: {
@@ -104,6 +110,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-html-build');
+  grunt.loadNpmTasks('grunt-execute');
   
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -116,19 +123,22 @@ module.exports = function(grunt) {
   grunt.registerTask('check', ['jshint', 'csslint']);
   
   // Build-check task(s).
-	grunt.registerTask('build-check', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 	
 	// Build task(s).
-	grunt.registerTask('build', ['concat', 'uglify', 'cssmin', 'htmlbuild']);
+	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild']);
 
   // Default task(s).
   grunt.registerTask('default', ['build-check', 'nodemon:development']);
   
   // Run task(s).
-  grunt.registerTask('run', ['nodemon:development']);
+  grunt.registerTask('run-dev', ['nodemon:development']);
   
   // Watch task(s).
   grunt.registerTask('watch', ['watch']);
+  
+  // Clean task(s).
+  grunt.registerTask('clean', ['execute:clean']);
   
   // Production task(s).
   grunt.registerTask('production', ['build', 'nodemon:production']);

@@ -5,3 +5,4 @@ log/
 public/
 dist/css/
 dist/js/
+package-lock.json

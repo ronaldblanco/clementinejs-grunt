@@ -47,6 +47,7 @@
     "grunt-contrib-qunit": "^2.0.0",
     "grunt-contrib-uglify": "^3.0.1",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-execute": "^0.2.2",
     "grunt-html-build": "^0.7.1",
     "grunt-nodemon": "^0.4.2",
     "jshint-stylish": "^2.2.1",
@@ -57,6 +58,7 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "randomatic": "^1.1.7",
+    "rimraf": "^2.6.1",
     "urlparser": "^0.3.9",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6"

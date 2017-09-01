@@ -2,6 +2,7 @@ var fs = require('fs');
 var compression = require('compression');
 var winston = require('winston');
   require('winston-daily-rotate-file');
+var rimraf = require('rimraf');
 
 //LOGGER//////////////////////////////////////////
 var transport= new winston.transports.DailyRotateFile({
@@ -61,6 +62,16 @@ module.exports = {
         mask = '0777';
     }
     fs.mkdir(path, mask, function(err) {
+        if (err) {
+            if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
+            else cb(err); // something else went wrong
+        } else cb(null); // successfully created folder
+    });
+  },
+  
+  deleteFolder: function (path,  cb) {
+    'use strict';
+    rimraf(path, function(err) {
         if (err) {
             if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
             else cb(err); // something else went wrong
