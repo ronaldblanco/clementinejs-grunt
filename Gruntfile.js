@@ -122,8 +122,11 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['build-check', 'nodemon:development']);
   
-  // Run task(s).
+  // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
+  
+  // Run task(s).
+  grunt.registerTask('run', ['nodemon:production']);
   
   // Watch task(s).
   //grunt.registerTask('watch', ['watch']);

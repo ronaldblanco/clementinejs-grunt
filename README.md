@@ -6,15 +6,22 @@
 
 The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements:<br>
 GRUNT Ready version of Clementinejs<br>
-    ---grunt or npm start to run the app<br>
+    ---grunt or npm start to run the app in development mode<br>
     ---grunt check-all or npm test to run tests on the app<br>
     ---grunt build to build the app<br>
     ---All files went modifyed following good practices<br>
+    ---server.js run the grunt build commant in development mode<br>
+    ---grunt build-check (build and check app)<br>
+    ---grunt run-dev (run only development)<br>
+    ---grunt run (run only production)<br>
+    ---grunt clean (clean app files)<br>
+    ---grunt development (build and run)<br>
+    ---grunt production (build and run)<br>
+Added NODE_ENV=development or production<br>
 Added Jquery<br>
 Added Bootstrap<br>
 Added w3.css responsive<br>
 Added a controller for web socket use with socket.io<br>
-Added head.html and foot.html to do more easy the html customization<br>
 Added urlparser<br>
 Added TWITTER passport Authentication<br>
      ---TWITTER_KEY=your-client-id-here<br>
@@ -22,7 +29,7 @@ Added TWITTER passport Authentication<br>
 Added a sample of array manipulation inside mongodb<br>
 Forced Cache function<br>
 Added Compression<br>
-Working with Node 4.8.4<br>
+Working with Node 6.11.1<br>
 Added a Logging with Winston<br>
 Added body-parser<br>
 Added cookie-parser<br>
