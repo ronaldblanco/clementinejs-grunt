@@ -42,8 +42,12 @@ module.exports = function(grunt) {
     },
     
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'qunit']
+      options: {
+      livereload: true,
+      event: ['all']
+      },
+      files: ['<%= jshint.files %>', '<%= concat.files %>', '<%= cssmin.files %>', '<%= htmlbuild.files %>'],
+      tasks: ['jshint', 'concat', 'cssmin', 'htmlbuild']
     },
     
     nodemon: {
@@ -52,8 +56,8 @@ module.exports = function(grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: ['public/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
-					ignore: ['node_modules/**','log/**']
+					watch: ['app/views/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					ignore: ['node_modules/**', 'log/**', 'public/**', 'dist/**']
 				}
 			},
 			production: {
@@ -111,22 +115,25 @@ module.exports = function(grunt) {
   // Test task(s).
   grunt.registerTask('check', ['jshint', 'csslint']);
   
-  // Build task(s).
-	grunt.registerTask('build', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+  // Build-check task(s).
+	grunt.registerTask('build-check', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
 	
 	// Build task(s).
-	//grunt.registerTask('builddev', ['check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	grunt.registerTask('build', ['concat', 'uglify', 'cssmin', 'htmlbuild']);
 
   // Default task(s).
-  grunt.registerTask('default', ['build', 'nodemon:development']);
+  grunt.registerTask('default', ['build-check', 'nodemon:development']);
   
-  // Default task(s).
+  // Run task(s).
   grunt.registerTask('run', ['nodemon:development']);
+  
+  // Watch task(s).
+  grunt.registerTask('watch', ['watch']);
   
   // Production task(s).
   grunt.registerTask('production', ['build', 'nodemon:production']);
   
   // Development task(s).
-  grunt.registerTask('development', ['build', 'nodemon:development']);
+  grunt.registerTask('development', ['build-check', 'nodemon:development']);
 
 };
