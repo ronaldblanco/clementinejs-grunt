@@ -11,7 +11,6 @@ var session = require('express-session');
 var compression = require('compression');
 var winston = require('winston');
 require('winston-daily-rotate-file');
-//var fs = require('fs');
 var functions = require('./app/common/functions.server.js');
 
 var app = express();

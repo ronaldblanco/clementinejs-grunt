@@ -3,7 +3,6 @@ var compression = require('compression');
 var winston = require('winston');
   require('winston-daily-rotate-file');
 var rimraf = require('rimraf');
-
 var exec = require('child_process');
 
 //LOGGER///////////////////////////////////////////
@@ -48,19 +47,23 @@ module.exports = {
   
   cacheIt: function(req, res, next) {
     'use strict';
-    if (process.env.NODE_ENV === 'development') logIt(logger,req.url);
+    var cache;
+    if (process.env.NODE_ENV === 'development'){
+      logIt(logger,req.url);
+      cache = '0';
+    } else if (process.env.NODE_ENV === 'production') cache = '3600';
     //console.log(req.url);
     //if (req.url.match(/^\/(css|js|img|font|png|map)\/.+/)) {
         //res.set('Cache-Control', 'public, max-age=3600');
     //}
-    if (req.url.match('/public/css/bootstrap.min.css.map')) {
+    if (req.url.match('/dist/bootstrap.min.css.map')) {
         //logger.info('Cache bootstrap');
         res.set('Cache-Control', 'public, max-age=3600');//seconds
     }
     //res = functions.cache(req, res, '/public/css/bootstrap.min.css.map', '3600');
     if (req.url.match('/login') || req.url.match('/profile')) {
         //logger.info('Cache Login or Profile');
-        res.set('Cache-Control', 'public, max-age=120');//seconds
+        res.set('Cache-Control', 'public, max-age=' + cache);//seconds
     }
     next();
   },
