@@ -119,17 +119,11 @@ module.exports = function(grunt) {
 	// Build task(s).
 	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild']);
 
-  // Default task(s).
-  grunt.registerTask('default', ['build-check', 'nodemon:development']);
-  
   // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
   
   // Run task(s).
   grunt.registerTask('run', ['nodemon:production']);
-  
-  // Watch task(s).
-  //grunt.registerTask('watch', ['watch']);
   
   // Clean task(s).
   grunt.registerTask('clean', ['execute:clean']);
@@ -139,5 +133,8 @@ module.exports = function(grunt) {
   
   // Development task(s).
   grunt.registerTask('development', ['build-check', 'nodemon:development']);
+  
+  // Default task(s).
+  grunt.registerTask('default', ['production']);
 
 };
