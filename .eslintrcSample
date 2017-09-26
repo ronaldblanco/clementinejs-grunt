@@ -1,0 +1,19 @@
+{
+    "parserOptions": {
+        //"ecmaVersion": 6,
+        "sourceType": "module",
+        /*"ecmaFeatures": {
+            "jsx": false
+        }*/
+    },
+    "rules": {
+        "semi": 2,
+        "eqeqeq": 0,
+        "curly": 2//,
+        //"quotes": [2, "double"]
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}

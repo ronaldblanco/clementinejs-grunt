@@ -91,14 +91,21 @@ module.exports = function(grunt) {
     },
 
     fixturesPath: "dist",
-    htmlbuild: htmlbuildconfig
+    htmlbuild: htmlbuildconfig,
+    
+    eslint: {
+      options: {
+            silent: true
+        },
+        src: ["app/**/*.js"]
+    }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
-  //grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('gruntify-eslint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-html-build');
   grunt.loadNpmTasks('grunt-execute');
@@ -108,10 +115,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   
   // Test all task(s).
-  grunt.registerTask('check-all', ['jshint', 'csslint', 'qunit']);
+  grunt.registerTask('check-all', ['jshint', 'csslint', 'qunit', 'eslint']);
   
   // Test task(s).
-  grunt.registerTask('check', ['jshint', 'csslint']);
+  grunt.registerTask('check', ['jshint', 'csslint', 'eslint']);
   
   // Build-check task(s).
 	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);

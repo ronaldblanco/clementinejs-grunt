@@ -10,7 +10,7 @@
    function updateClickCount (data) {
       if(data != null && data != undefined){
          var clicksObject = JSON.parse(data);
-         if(clickNbr != null) clickNbr.innerHTML = clicksObject.clicks;
+         if(clickNbr != null) {clickNbr.innerHTML = clicksObject.clicks;}
       }
    }
 

@@ -58,7 +58,7 @@ function UserHandler (emailServer) {
 					
 					newUser.login.username = req.body.username;
 					var email = validateEmail(req.body.username);
-					if(email != false) newUser.login.email = email;
+					if(email != false) {newUser.login.email = email;}
 					newUser.login.password = md5Hex(req.body.password);
 					newUser.login.id = randomize('0', 7);
 					newUser.login.displayName = req.body.display;

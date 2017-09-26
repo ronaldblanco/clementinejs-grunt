@@ -14,7 +14,7 @@
       //cont = min;
       var colors = ["list-group-item-info","list-group-item-warning","list-group-item-danger","list-group-item-success"];
       cont++;
-      if(cont > -1 && cont < 2) return colors[cont];
+      if(cont > -1 && cont < 2) {return colors[cont];}
       else{
          cont = 0;
          return colors[cont];
@@ -25,7 +25,7 @@
       //cont = min;
       var colors = ["list-group-item-info","list-group-item-warning","list-group-item-danger","list-group-item-success"];
       cont1++;
-      if(cont1 > 0 && cont1 < 4) return colors[cont1];
+      if(cont1 > 0 && cont1 < 4) {return colors[cont1];}
       else{
          cont1 = 2;
          return colors[cont1];
