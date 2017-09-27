@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>'],
+          //'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>'],
           'dist/js/profile.<%= pkg.name %>.min.js': ['<%= concat.profile.dest %>'],
           'dist/js/user.<%= pkg.name %>.min.js': ['<%= concat.userlocal.dest %>'],
           'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>']
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: ['app/views/**/*.*'].concat(['gruntfile.js', 'server.js', 'app/**/*.js']),
+					watch: ['app/views/**/*.*'].concat(['gruntfile.js', 'server.js', 'express.js', 'app/**/*.js']),
 					ignore: ['node_modules/**', 'log/**', 'public/**', 'dist/**']
 				}
 			},
