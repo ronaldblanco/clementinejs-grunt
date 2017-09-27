@@ -50,8 +50,8 @@ module.exports = function(grunt) {
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
-					watch: ['app/views/**/*.*'].concat(['gruntfile.js', 'server.js', 'express.js', 'app/**/*.js']),
-					ignore: ['node_modules/**', 'log/**', 'public/**', 'dist/**']
+					watch: ['app/views/**/*.*'].concat(['gruntfile.js', 'server.js', 'express.js', 'expressDev.js', 'app/**/*.js']),
+					ignore: ['node_modules/**', 'log/**', 'public/**', 'dist/**', 'server/**']
 				}
 			},
 			production: {
