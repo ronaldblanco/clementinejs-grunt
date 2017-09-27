@@ -1,19 +1,16 @@
 'use strict';
 
-var express = require('express');
 var routes = require('./app/routes/index.js');
+var app = require('./express.js');
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 var passportTwitter = require('passport');
 var passportLocal = require('passport');
-var session = require('express-session');
 
-var compression = require('compression');
 var winston = require('winston');
 require('winston-daily-rotate-file');
 var functions = require('./app/common/functions.server.js');
-
-var app = express();
 
 require('dotenv').load();
 require('./app/config/passport')(passport);
@@ -24,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
 /////EMAIL CONFIG////////////////////////////////////////////////////////////////////////////
-app.use('/emailjs', express.static(process.cwd() + '/node_modules/emailjs'));
+//app.use('/emailjs', express.static(process.cwd() + '/node_modules/emailjs'));
 var emailServer = {
     'user' : process.env.EMAILUSER,
     'password' : process.env.EMAILPASS,
@@ -33,7 +30,7 @@ var emailServer = {
 };
 ////////////////////////////////////////////////////////////////////////////////////
 
-app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
+/*app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/dist', express.static(process.cwd() + '/dist'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
@@ -50,7 +47,7 @@ app.use(session({
 }));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());*/
 
 if (process.env.NODE_ENV === 'development'){
     //Grunt build execution
@@ -74,11 +71,11 @@ if (process.env.NODE_ENV === 'development'){
 }
 
 //Forzing Cache of static/////////////////////////
-app.use(functions.cacheIt);
+/*app.use(functions.cacheIt);
 /////////////////////////////////////////////////
 
 //COMPRESSION////////////////////////////////////
-app.use(compression({filter: functions.shouldCompress}));
+app.use(compression({filter: functions.shouldCompress}));*/
 /////////////////////////////////////////////////
 
 routes(app, passport, passportTwitter, passportLocal, emailServer);
