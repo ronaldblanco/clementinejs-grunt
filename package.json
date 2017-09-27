@@ -50,6 +50,7 @@
     "grunt-html-build": "^0.7.1",
     "grunt-nodemon": "^0.4.2",
     "gruntify-eslint": "^4.0.0",
+    "http": "0.0.0",
     "jshint-stylish": "^2.2.1",
     "md5-hex": "^2.0.0",
     "mongoose": "^4.10.8",
@@ -59,6 +60,7 @@
     "passport-twitter": "^1.0.4",
     "randomatic": "^1.1.7",
     "rimraf": "^2.6.1",
+    "socket.io": "^2.0.3",
     "urlparser": "^0.3.9",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6"

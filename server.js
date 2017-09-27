@@ -52,8 +52,30 @@ if (process.env.NODE_ENV === 'development'){
 
 routes(app, passport, passportTwitter, passportLocal, emailServer);
 
+//PORT config
 var port = process.env.PORT || 8080;
-app.listen(port,  function () {
-	console.log('Node.js listening on port ' + port + '...');
-	console.log(process.env.NODE_ENV + ' ENV!');
-});
+
+if (process.env.SOCKET === 'TRUE'){
+    //Uncomment to used the Websocket Controller
+    //using: socket.io http and model config.js as test
+    //WEBSOCKET///////////////////////////
+    var server = require('http').createServer(app);
+    var io = require('socket.io')(server);
+    var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
+
+    var endpoint = io
+        .of('/')
+        .on('connection', function (socket) {
+            webSocketHandler.respond(endpoint,socket,true);
+    });
+
+    server.listen(port,  function () {
+	    console.log('Node.js with WebSocket listening on port ' + port + '...');
+    });
+    //WEBSOCKET//////////////////////////
+    
+} else if (process.env.SOCKET === 'FALSE' || process.env.SOCKET === undefined || process.env.SOCKET === null){
+    app.listen(port,  function () {
+	    console.log('Node.js listening on port ' + port + '...');
+    });
+}
