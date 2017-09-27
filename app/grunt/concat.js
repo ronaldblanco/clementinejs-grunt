@@ -17,5 +17,9 @@ module.exports = {
       index: {
         src: ['app/common/ajax-functions.js','app/controllers/client/clickController.client.js','app/controllers/client/dataController.client.js','app/controllers/client/profileController.client.js','app/controllers/client/webSocketController.client.js'],
         dest: 'dist/js/index.<%= pkg.name %>.js'
-      }
+      },
+      /*server: {
+        src: ['express.js', 'server.js', 'express.js'],
+        dest: 'server/server.js'
+      }*/
     };

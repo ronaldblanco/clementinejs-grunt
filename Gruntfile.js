@@ -18,7 +18,10 @@ module.exports = function(grunt) {
           //'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>'],
           'dist/js/profile.<%= pkg.name %>.min.js': ['<%= concat.profile.dest %>'],
           'dist/js/user.<%= pkg.name %>.min.js': ['<%= concat.userlocal.dest %>'],
-          'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>']
+          'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>'],
+          'server/functions.server.js': ['app/common/functions.server.js'],
+          'server/express.js': ['express.js'],
+          'server/router.js': ['app/routes/index.js']
         }
       }
     },

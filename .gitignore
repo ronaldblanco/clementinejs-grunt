@@ -7,3 +7,4 @@ dist/css/
 dist/js/
 package-lock.json
 test.js
+server/

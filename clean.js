@@ -6,6 +6,12 @@ functions.deleteFolder(__dirname + '/public', function(err) {
     else console.log('Folder Public was clean');
 });
 //////////////////////////////////////////////////
+//RM FOLDER SERVER AND CREATE IT////////////////////////////////////
+functions.deleteFolder(__dirname + '/server', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder server was clean');
+});
+//////////////////////////////////////////////////
 //RM FOLDER /dist/css AND CREATE IT////////////////////////////////////
 functions.deleteFolder(__dirname + '/dist/css', function(err) {
     if (err) console.error(err);
