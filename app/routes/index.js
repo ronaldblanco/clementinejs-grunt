@@ -23,12 +23,12 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.min.html');
+			res.sendFile(path + '/public/min/index.min.html');
 		});
 		
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.min.html');
+			res.sendFile(path + '/public/min/login.min.html');
 		});
 
 	app.route('/logout')
@@ -39,7 +39,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/profile.min.html');
+			res.sendFile(path + '/public/min/profile.min.html');
 		});
 
 	app.route('/api/:id')
@@ -68,7 +68,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	/////////////////////////////////////////////////////////////////	
 	app.route('/authlocal')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/loginlocal.min.html');
+			res.sendFile(path + '/public/min/loginlocal.min.html');
 		});
 		
 	app.route('/auth/local') 
@@ -94,7 +94,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	
 	app.route('/auth/localnewok')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/usercreationOK.min.html');
+			res.sendFile(path + '/public/min/usercreationOK.min.html');
 		});
 	/////////////////////////////////////////////////////////////////
 	

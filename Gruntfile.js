@@ -19,11 +19,11 @@ module.exports = function(grunt) {
         collapseWhitespace: true
       },
       files: {                                   // Dictionary of files
-        'public/index.min.html': 'public/index.html',     // 'destination': 'source'
-        'public/login.min.html': 'public/login.html',
-        'public/loginlocal.min.html': 'public/loginlocal.html',
-        'public/profile.min.html': 'public/profile.html',
-        'public/usercreationOK.min.html': 'public/usercreationOK.html'
+        'public/min/index.min.html': 'public/index.html',     // 'destination': 'source'
+        'public/min/login.min.html': 'public/login.html',
+        'public/min/loginlocal.min.html': 'public/loginlocal.html',
+        'public/min/profile.min.html': 'public/profile.html',
+        'public/min/usercreationOK.min.html': 'public/usercreationOK.html'
       }
     },
     /*dev: {                                       // Another target

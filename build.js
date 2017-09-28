@@ -5,6 +5,10 @@ functions.ensureExists(__dirname + '/public', '0744', function(err) {
     if (err) console.error(err);
     else console.log('Folder Public was created or existed');
 });
+functions.ensureExists(__dirname + '/public/min', '0744', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder Public was created or existed');
+});
 //////////////////////////////////////////////////
 //CHECK FOLDER SERVER AND CREATE IT////////////////////////////////////
 functions.ensureExists(__dirname + '/server', '0744', function(err) {
