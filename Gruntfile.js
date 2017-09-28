@@ -15,13 +15,21 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
+          //Client/////////////////////////////////
           //'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>'],
           'dist/js/profile.<%= pkg.name %>.min.js': ['<%= concat.profile.dest %>'],
           'dist/js/user.<%= pkg.name %>.min.js': ['<%= concat.userlocal.dest %>'],
           'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>'],
-          'server/functions.server.js': ['app/common/functions.server.js'],
+          //Server////////////////////////////////////
+          'server/common/functions.server.js': ['app/common/functions.server.js'],
           'server/express.js': ['express.js'],
-          'server/router.js': ['app/routes/index.js']
+          'server/routes/index.js': ['app/routes/index.js']//,
+          /*'server/controllers/clickHandler.server.js': ['app/controllers/clickHandler.server.js'],
+          'server/controllers/dataHandler.server.js': ['app/controllers/dataHandler.server.js'],
+          'server/controllers/userHandler.server.js': ['app/controllers/userHandler.server.js'],
+          'server/controllers/webSocketHandler.server.js': ['app/controllers/webSocketHandler.server.js'],
+          'server/models/users.js': ['app/models/users.js'],
+          'server/models/socketData.js': ['app/models/socketData.js']*/
         }
       }
     },

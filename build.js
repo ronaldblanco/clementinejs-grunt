@@ -11,6 +11,22 @@ functions.ensureExists(__dirname + '/server', '0744', function(err) {
     if (err) console.error(err);
     else console.log('Folder Server was created or existed');
 });
+functions.ensureExists(__dirname + '/server/controllers', '0744', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder Controllers was created or existed');
+});
+functions.ensureExists(__dirname + '/server/models', '0744', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder Controllers was created or existed');
+});
+functions.ensureExists(__dirname + '/server/common', '0744', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder Controllers was created or existed');
+});
+functions.ensureExists(__dirname + '/server/routes', '0744', function(err) {
+    if (err) console.error(err);
+    else console.log('Folder Controllers was created or existed');
+});
 //////////////////////////////////////////////////
 //CHECK FOLDER /dist/css AND CREATE IT////////////////////////////////////
 functions.ensureExists(__dirname + '/dist/css', '0744', function(err) {

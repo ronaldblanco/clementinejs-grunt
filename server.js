@@ -1,19 +1,5 @@
 'use strict';
 
-var routes = require('./app/routes/index.js');
-var app = require('./expressDev.js');
-var functions = require('./app/common/functions.server.js');
-
-if (process.env.NODE_ENV === 'development'){
-    routes = require('./app/routes/index.js');
-    app = require('./expressDev.js');
-    functions = require('./app/common/functions.server.js');
-} else if (process.env.NODE_ENV === 'production'){
-    routes = require('./server/router.js');
-    app = require('./server/express.js');
-    functions = require('./server/functions.server.js');
-}
-
 var mongoose = require('mongoose');
 var passport = require('passport');
 var passportTwitter = require('passport');
@@ -31,6 +17,16 @@ mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
 console.log(process.env.NODE_ENV);
+//Changes in case of production
+if (process.env.NODE_ENV === 'production'){
+    var routes = require('./server/routes/index.js');
+    var app = require('./server/express.js');
+    var functions = require('./server/common/functions.server.js');
+} else if (process.env.NODE_ENV === 'development'){
+    var routes = require('./app/routes/index.Dev.js');
+    var app = require('./express.Dev.js');
+    var functions = require('./app/common/functions.server.js');
+}
 /////EMAIL CONFIG////////////////////////////////////////////////////////////////////////////
 var emailServer = {
     'user' : process.env.EMAILUSER,
@@ -72,7 +68,10 @@ if (process.env.SOCKET === 'TRUE'){
     //WEBSOCKET///////////////////////////
     var server = require('http').createServer(app);
     var io = require('socket.io')(server);
+    //Development as default
     var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
+    //Production
+    //if (process.env.NODE_ENV === 'production') webSocketHandler = require(process.cwd() + '/server/controllers/webSocketHandler.server.js');
 
     var endpoint = io
         .of('/')

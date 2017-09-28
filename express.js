@@ -3,7 +3,7 @@
 var express = require('express');
 var session = require('express-session');
 var passport = require('passport');
-var functions = require('./functions.server.js');
+var functions = require('./common/functions.server.js');
 var compression = require('compression');
 
 var app = express();
