@@ -12,6 +12,28 @@ module.exports = function(grunt) {
 
     uglify: uglifyconfig,
     
+    htmlmin: {                                     // Task
+    dist: {                                      // Target
+      options: {                                 // Target options
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      files: {                                   // Dictionary of files
+        'public/index.min.html': 'public/index.html',     // 'destination': 'source'
+        'public/login.min.html': 'public/login.html',
+        'public/loginlocal.min.html': 'public/loginlocal.html',
+        'public/profile.min.html': 'public/profile.html',
+        'public/usercreationOK.min.html': 'public/usercreationOK.html'
+      }
+    },
+    /*dev: {                                       // Another target
+      files: {
+        'dist/index.html': 'src/index.html',
+        'dist/contact.html': 'src/contact.html'
+      }
+    }*/
+    },
+    
     qunit: {
       files: ['public/*.html']
     },
@@ -91,6 +113,7 @@ module.exports = function(grunt) {
 
   });
 
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
@@ -110,10 +133,10 @@ module.exports = function(grunt) {
   grunt.registerTask('check', ['jshint', 'csslint', 'eslint']);
   
   // Build-check task(s).
-	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit']);
+	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'htmlmin', 'qunit']);
 	
 	// Build task(s).
-	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild']);
+	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'htmlmin']);
 
   // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
