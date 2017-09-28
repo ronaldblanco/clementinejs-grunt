@@ -1,7 +1,7 @@
 
 
-var Users = require('../models/users.js');
-var message = require('../models/message.js');
+//var Users = require('../models/users.js');
+//var message = require('../models/message.js');
 //var Users1 = require('../models/users.js');
 var email = require("emailjs/email");
 var randomize = require('randomatic');
@@ -35,7 +35,7 @@ function validateEmail (email) {
 }
 /////////////////////////////////////////////////////
 
-function UserHandler (emailServer) {
+function UserHandler (Users, emailServer, message) {
 	'use strict';
 	var server 	= email.server.connect({
 		'user':    emailServer.user, 

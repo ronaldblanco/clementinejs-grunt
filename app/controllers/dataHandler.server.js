@@ -1,9 +1,9 @@
 
 
-var Users = require('../models/users.js');
-var url = require("urlparser");
+//var Users = require('../models/users.js');
+//var url = require("urlparser");
 
-function DataHandler () {
+function DataHandler (Users, url) {
 	'use strict';
 	this.getDatas = function (req, res) {
 		Users

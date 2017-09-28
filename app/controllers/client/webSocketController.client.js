@@ -24,7 +24,7 @@ client.on('stats', function(data) {
     var lastope = document.querySelector('#lastope');
     
     if(act === true) {
-        count.innerHTML = 'Connected Clients: <kbd>'+connected/3+'</kbd>';
+        count.innerHTML = 'Connected Clients: <kbd>'+connected+'</kbd>';
         lastope.innerHTML = 'Last data operation: <kbd>' + data.data.ope + '</kbd> <kbd>'+name+'</kbd>';
         /*function updateChart(){
             console.log('WEBSOCKETCLIENT->'+data.data);

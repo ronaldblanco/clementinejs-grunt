@@ -70,13 +70,14 @@ if (process.env.SOCKET === 'TRUE'){
     var io = require('socket.io')(server);
     //Development as default
     var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
+    var config = require(process.cwd() + '/app/models/socketData.js');
     //Production
     //if (process.env.NODE_ENV === 'production') webSocketHandler = require(process.cwd() + '/server/controllers/webSocketHandler.server.js');
 
     var endpoint = io
         .of('/')
         .on('connection', function (socket) {
-            webSocketHandler.respond(endpoint,socket,true);
+            webSocketHandler.respond(endpoint, socket, true, config, 0);
     });
 
     server.listen(port,  function () {

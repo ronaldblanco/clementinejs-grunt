@@ -1,9 +1,9 @@
 // no require needed here, at least, I don't think so
-var config = require('../models/socketData.js');
-var numClients = 0;
+//var config = require('../models/socketData.js');
+//var numClients = 0;
 // Controller agrees to implement the function called "respond"
 
-module.exports.respond = function(endpoint,socket,act){
+module.exports.respond = function(endpoint, socket, act, config, numClients){
     config.act = act;
     var io = endpoint;
     socket.on('event', function(data) {

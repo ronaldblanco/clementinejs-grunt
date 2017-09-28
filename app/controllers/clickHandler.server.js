@@ -1,8 +1,8 @@
 
 
-var Users = require('../models/users.js');
+//var Users = require('../models/users.js');
 
-function ClickHandler () {
+function ClickHandler (Users) {
 	'use strict';
 	this.getClicks = function (req, res) {
 		Users
