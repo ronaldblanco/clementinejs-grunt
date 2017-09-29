@@ -16,15 +16,21 @@ require('./app/config/passport-local')(passportLocal);
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
 
+//process.env.NODE_ENV asignation and check
+if (process.argv.length > 2){
+    if (process.argv[2] !== undefined || process.argv[2] !== null) {process.env.NODE_ENV = process.argv[2]}
+} else if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === null) {
+    process.env.NODE_ENV = 'production';
+}
+
 console.log(process.env.NODE_ENV);
-//Changes in case of production
 if (process.env.NODE_ENV === 'production'){
-    console.log("Using folder SERVER for server side!");
+    console.log("Using folder SERVER for server side and PUBLIC/MIN for client html!");
     var routes = require('./server/routes/index.js');
     var app = require('./server/express.js');
     var functions = require('./server/common/functions.server.js');
 } else if (process.env.NODE_ENV === 'development'){
-    console.log("Using folder APP for server side!");
+    console.log("Using folder APP for server side and PUBLIC for client html!");
     var routes = require('./app/routes/index.Dev.js');
     var app = require('./express.Dev.js');
     var functions = require('./app/common/functions.server.js');
