@@ -20,7 +20,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	function isNotLoggedIn (req, res, next) {
 		return next();
 	}
-
+	
 	var clickHandler = new ClickHandler(Users);
 	var dataHandler = new DataHandler(Users, url);
 	var userHandler = new UserHandler(Users, emailServer, message, email);
