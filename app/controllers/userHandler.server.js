@@ -3,7 +3,7 @@
 //var Users = require('../models/users.js');
 //var message = require('../models/message.js');
 //var Users1 = require('../models/users.js');
-var email = require("emailjs/email");
+//var email = require("emailjs/email");
 var randomize = require('randomatic');
 var md5Hex = require('md5-hex');
 //var url = require("urlparser");
@@ -35,7 +35,7 @@ function validateEmail (email) {
 }
 /////////////////////////////////////////////////////
 
-function UserHandler (Users, emailServer, message) {
+function UserHandler (Users, emailServer, message, email) {
 	'use strict';
 	var server 	= email.server.connect({
 		'user':    emailServer.user, 

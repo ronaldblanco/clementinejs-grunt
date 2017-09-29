@@ -1,6 +1,7 @@
 var path = process.cwd();
 var Users = require(path + '/app/models/users.js');
 var message = require(path + '/app/models/message.js');
+var email = require(path + "/node_modules/emailjs/email");
 var url = require("urlparser");
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var DataHandler = require(path + '/app/controllers/dataHandler.server.js');
@@ -22,7 +23,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 
 	var clickHandler = new ClickHandler(Users);
 	var dataHandler = new DataHandler(Users, url);
-	var userHandler = new UserHandler(Users, emailServer, message);
+	var userHandler = new UserHandler(Users, emailServer, message, email);
 	
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
