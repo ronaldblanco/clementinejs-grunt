@@ -65,7 +65,9 @@ module.exports = function(grunt) {
 			production: {
 				script: 'server.js',
 				options: {
-					ext: 'js,html'
+					ext: 'js,html',
+					watch: ['app/views/template/*.js'],
+					ignore: ['**/**']
 				}
 			}
 		},
@@ -128,31 +130,22 @@ module.exports = function(grunt) {
   
   // Test all task(s).
   grunt.registerTask('check-all', ['jshint', 'csslint', 'qunit', 'eslint']);
-  
   // Test task(s).
   grunt.registerTask('check', ['jshint', 'csslint', 'eslint']);
-  
   // Build-check task(s).
-	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'htmlmin', 'qunit']);
-	
+	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit', 'htmlmin']);
 	// Build task(s).
 	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'htmlmin']);
-
   // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
-  
   // Run task(s).
   grunt.registerTask('run', ['nodemon:production']);
-  
   // Clean task(s).
   grunt.registerTask('clean', ['execute:clean']);
-  
   // Production task(s).
   grunt.registerTask('production', ['build', 'nodemon:production']);
-  
   // Development task(s).
   grunt.registerTask('development', ['build-check', 'nodemon:development']);
-  
   // Default task(s).
   grunt.registerTask('default', ['production']);
 

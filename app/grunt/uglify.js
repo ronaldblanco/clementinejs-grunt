@@ -19,7 +19,7 @@ module.exports = {
           'server/controllers/userHandler.server.js': ['app/controllers/userHandler.server.js'],
           'server/controllers/webSocketHandler.server.js': ['app/controllers/webSocketHandler.server.js'],
           //Server-models////////////////////////////////////
-          'server/models/users.js': ['app/models/users.js'],
+          //'server/models/users.js': ['app/models/users.js'],
           'server/models/socketData.js': ['app/models/socketData.js'],
           'server/models/message.js': ['app/models/message.js']
         }

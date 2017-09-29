@@ -19,10 +19,12 @@ mongoose.Promise = global.Promise;
 console.log(process.env.NODE_ENV);
 //Changes in case of production
 if (process.env.NODE_ENV === 'production'){
+    console.log("Using folder SERVER for server side!");
     var routes = require('./server/routes/index.js');
     var app = require('./server/express.js');
     var functions = require('./server/common/functions.server.js');
 } else if (process.env.NODE_ENV === 'development'){
+    console.log("Using folder APP for server side!");
     var routes = require('./app/routes/index.Dev.js');
     var app = require('./express.Dev.js');
     var functions = require('./app/common/functions.server.js');
@@ -68,12 +70,17 @@ if (process.env.SOCKET === 'TRUE'){
     //WEBSOCKET///////////////////////////
     var server = require('http').createServer(app);
     var io = require('socket.io')(server);
-    //Development as default
-    var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
-    var config = require(process.cwd() + '/app/models/socketData.js');
-    //Production
-    //if (process.env.NODE_ENV === 'production') webSocketHandler = require(process.cwd() + '/server/controllers/webSocketHandler.server.js');
-
+    //Changes in case of production
+    if (process.env.NODE_ENV === 'production'){
+        //Development as default
+        var webSocketHandler = require(process.cwd() + '/server/controllers/webSocketHandler.server.js');
+        var config = require(process.cwd() + '/server/models/socketData.js');
+    } else if (process.env.NODE_ENV === 'development'){
+        //Development as default
+        var webSocketHandler = require(process.cwd() + '/app/controllers/webSocketHandler.server.js');
+        var config = require(process.cwd() + '/app/models/socketData.js');
+    }
+  
     var endpoint = io
         .of('/')
         .on('connection', function (socket) {
