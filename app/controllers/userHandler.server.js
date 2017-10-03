@@ -74,7 +74,7 @@ function UserHandler (Users, emailServer, message, email) {
 							//console.log(server);
 							server.send({
 							text:    "Welcome to Clementine Pnald version!", 
-							from:    "Admin <rblanco@gammaseafood.com>", 
+							from:    "Admin <"+emailServer.user+">", 
 							//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
 							to:      "New User <"+ email +">",
 							//cc:      "else <else@your-email.com>",
@@ -117,7 +117,7 @@ function UserHandler (Users, emailServer, message, email) {
 				//console.log(server);
 				server.send({
 					text:    "Your new password is: "+newPass, 
-					from:    "Admin <rblanco@gammaseafood.com>", 
+					from:    "Admin <"+emailServer.user+">", 
 					//to:      "someone <rblanco@gammaseafood.com>, another <another@your-email.com>",
 					to:      "New User <"+ username +">",
 					//cc:      "else <else@your-email.com>",
