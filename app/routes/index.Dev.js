@@ -55,24 +55,25 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 			res.json(req.user.login);
 		});
 
-	app.route('/auth/github')
-		.get(passport.authenticate('github'));
+	if (loginConfig.length === 0){
+		app.route('/auth/github')
+			.get(passport.authenticate('github'));
 
-	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
+		app.route('/auth/github/callback')
+			.get(passport.authenticate('github', {
+				successRedirect: '/',
+				failureRedirect: '/login'
+			}));
 		
-	app.route('/auth/twitter')
-		.get(passportTwitter.authenticate('twitter'));
+		app.route('/auth/twitter')
+			.get(passportTwitter.authenticate('twitter'));
 
-	app.route('/auth/twitter/callback')
-		.get(passportTwitter.authenticate('twitter', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
-	
+		app.route('/auth/twitter/callback')
+			.get(passportTwitter.authenticate('twitter', {
+				successRedirect: '/',
+				failureRedirect: '/login'
+			}));
+	}
 	/////////////////////////////////////////////////////////////////	
 	app.route('/authlocal')
 		.get(function (req, res) {
