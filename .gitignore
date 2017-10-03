@@ -8,3 +8,4 @@ dist/js/
 package-lock.json
 test.js
 server/
+server.min.js

@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 				}
 			},
 			production: {
-				script: 'server.js',
+				script: 'server.min.js',
 				options: {
 				  args: ['production'],
 					ext: 'js,html',
@@ -137,7 +137,9 @@ module.exports = function(grunt) {
   // Build-check task(s).
 	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit', 'htmlmin']);
 	// Build task(s).
-	grunt.registerTask('build', ['execute:build', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'htmlmin']);
+	grunt.registerTask('build-dev', ['execute:build', 'concat', 'uglify:development', 'cssmin', 'htmlbuild']);
+	// Build task(s).
+	grunt.registerTask('build-pro', ['execute:build', 'concat', 'uglify:production', 'cssmin', 'htmlbuild', 'htmlmin']);
   // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
   // Run task(s).
@@ -145,7 +147,7 @@ module.exports = function(grunt) {
   // Clean task(s).
   grunt.registerTask('clean', ['execute:clean']);
   // Production task(s).
-  grunt.registerTask('production', ['build', 'nodemon:production']);
+  grunt.registerTask('production', ['build-pro', 'nodemon:production']);
   // Development task(s).
   grunt.registerTask('development', ['build-check', 'nodemon:development']);
   // Default task(s).

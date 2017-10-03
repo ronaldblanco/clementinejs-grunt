@@ -25,7 +25,7 @@ if (process.argv.length > 2){
 
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production'){
-    console.log("Using folder SERVER for server side and PUBLIC/MIN for client html!");
+    console.log("Using folder SERVER for server side, PUBLIC/MIN for client html and Good Practices for Production!");
     var routes = require('./server/routes/index.js');
     var app = require('./server/express.js');
     var functions = require('./server/common/functions.server.js');
@@ -46,7 +46,7 @@ var emailServer = {
 
 if (process.env.NODE_ENV === 'development'){
     //Grunt build execution
-    functions.execute('grunt build');
+    functions.execute('grunt build-dev');
     /////////////////////////
     //CHECK FOLDER LOG AND CREATE IT////////////////////////////////////
     functions.ensureExists(__dirname + '/log', '0744', function(err) {
