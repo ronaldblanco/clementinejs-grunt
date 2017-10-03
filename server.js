@@ -9,9 +9,14 @@ var winston = require('winston');
 require('winston-daily-rotate-file');
 
 require('dotenv').load();
-require('./app/config/passport')(passport);
-require('./app/config/passport-twitter')(passportTwitter);
+if (process.env.EXT_AUTH === 'TRUE') {
+    require('./app/config/passport')(passport);
+    require('./app/config/passport-twitter')(passportTwitter);
+} 
 require('./app/config/passport-local')(passportLocal);
+
+var loginConfig = [];
+if (process.env.EXT_AUTH === 'FALSE' || process.env.EXT_AUTH === undefined) loginConfig.push('noEXT_AUTH');
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
@@ -65,7 +70,7 @@ if (process.env.NODE_ENV === 'development'){
     /////////////////////////////////////////////////
 }
 
-routes(app, passport, passportTwitter, passportLocal, emailServer);
+routes(app, passport, passportTwitter, passportLocal, emailServer, loginConfig);
 
 //PORT config
 var port = process.env.PORT || 8080;

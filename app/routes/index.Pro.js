@@ -7,7 +7,7 @@ var ClickHandler = require(path + '/server/controllers/clickHandler.server.js');
 var DataHandler = require(path + '/server/controllers/dataHandler.server.js');
 var UserHandler = require(path + '/server/controllers/userHandler.server.js');
 
-module.exports = function (app, passport, passportTwitter, passportLocal, emailServer) {
+module.exports = function (app, passport, passportTwitter, passportLocal, emailServer, loginConfig) {
 	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -29,10 +29,14 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/min/index.min.html');
 		});
+	
+	var login = '';	
+	if (loginConfig[0] === 'noEXT_AUTH') login = '/public/min/loginlocal.min.html';
+	else login = '/public/min/login.min.html';
 		
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/min/login.min.html');
+			res.sendFile(path + login);
 		});
 
 	app.route('/logout')
