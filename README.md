@@ -18,6 +18,7 @@ GRUNT Ready version of Clementinejs<br>
     ---grunt development (build and run)<br>
     ---grunt production (build and run)<br>
 Added NODE_ENV=development or production<br>
+Added EXT_AUTH=TRUE to used the others authentication methods (GITHUB and TWITTER)<br>
 Added Socket functionality that can be activated with<br>
     ---SOCKET=TRUE<br>
 Added Jquery<br>

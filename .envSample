@@ -10,3 +10,5 @@ EMAILUSER=email
 EMAILPASS=password
 EMAILHOST=email_server
 EMAILPORT=smtp_port
+EXT_AUTH=TRUE
+SOCKET=TRUE
