@@ -140,6 +140,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build-dev', ['execute:build', 'concat', 'uglify:development', 'cssmin', 'htmlbuild']);
 	// Build task(s).
 	grunt.registerTask('build-pro', ['execute:build', 'concat', 'uglify:production', 'cssmin', 'htmlbuild', 'htmlmin']);
+	// Build task(s).
+	grunt.registerTask('build', ['execute:build', 'concat', 'uglify:production', 'cssmin', 'htmlbuild', 'htmlmin']);
   // Run dev task(s).
   grunt.registerTask('run-dev', ['nodemon:development']);
   // Run task(s).
