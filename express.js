@@ -24,9 +24,10 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 //////////////////////////////////////////////
 
 app.use(session({
-	secret: 'secretClementine',
+    secret: 'secretClementine',
 	resave: false,
-	saveUninitialized: true
+	saveUninitialized: true,
+	name: 'sessionId'//Good practices Production
 }));
 
 app.use(passport.initialize());
@@ -39,5 +40,10 @@ app.use(functions.cacheIt);
 //COMPRESSION////////////////////////////////////
 app.use(compression({filter: functions.shouldCompress}));
 /////////////////////////////////////////////////
+
+//Production Good Practices
+var helmet = require('helmet');
+app.use(helmet());
+///////////////////////////
 
 module.exports = app;
