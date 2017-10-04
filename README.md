@@ -7,7 +7,7 @@
 The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements.<br>
 
 You can see these Boilerplate running here:<br>
-<link src="https://clementinejs-pnald-grunt.herokuapp.com">clementinejs-pnald-grunt.herokuapp.com</link><br>
+- [**https://clementinejs-pnald-grunt.herokuapp.com**](https://clementinejs-pnald-grunt.herokuapp.com)
 
 GRUNT Ready version of Clementinejs<br>
     ---grunt or npm start to run the app in production mode<br>
