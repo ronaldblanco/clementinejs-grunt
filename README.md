@@ -4,13 +4,17 @@
 
 ## Overview
 
-The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements:<br>
+The pnald GRUNT version is a personalized version of Clementine.js FCC with a couple improvements.<br>
+
+You can see these Boilerplate running here:<br>
+<link src="https://clementinejs-pnald-grunt.herokuapp.com">clementinejs-pnald-grunt.herokuapp.com</link><br>
+
 GRUNT Ready version of Clementinejs<br>
     ---grunt or npm start to run the app in production mode<br>
     ---grunt check-all or npm test to run tests on the app<br>
     ---grunt build to build the app<br>
     ---All files went modifyed following good practices<br>
-    ---server.js run the grunt build commant in development mode<br>
+    ---server.js auto run the grunt build-dev commant in development mode<br>
     ---grunt build-check (build and check app)<br>
     ---grunt run-dev (run only development)<br>
     ---grunt run (run only production)<br>
@@ -18,9 +22,12 @@ GRUNT Ready version of Clementinejs<br>
     ---grunt development (build and run)<br>
     ---grunt production (build and run)<br>
 Added NODE_ENV=development or production<br>
-Added EXT_AUTH=TRUE to used the others authentication methods (GITHUB and TWITTER)<br>
+Added EXT_AUTH=TRUE to .env file to used the others authentication methods (GITHUB and TWITTER)<br>
+Default it will use only local passport authentication<br>
 Added Socket functionality that can be activated with<br>
     ---SOCKET=TRUE<br>
+Added Snyk<br>
+Added Helmet and cookie-session for production security<br>
 Added Jquery<br>
 Added Bootstrap<br>
 Added w3.css responsive<br>
@@ -37,7 +44,7 @@ Added a Logging with Winston<br>
 Added body-parser<br>
 Added cookie-parser<br>
 Added LOCAL passport Authentication<br>
-Added emailjs for the local Auth...<br>
+Added emailjs for the local Auth with ssl...<br>
     ---EMAILUSER=email<br>
     ---EMAILPASS=password<br>
     ---EMAILHOST=hostserver<br>

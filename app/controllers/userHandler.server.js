@@ -42,7 +42,7 @@ function UserHandler (Users, emailServer, message, email) {
 		'password': emailServer.password, 
 		'host':    emailServer.host,
 		'port': emailServer.port,
-		'ssl':     false
+		'ssl':     true
 	});
 
     this.addUser = function (req, res) {//Add Local user
