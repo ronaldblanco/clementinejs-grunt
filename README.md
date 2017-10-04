@@ -10,22 +10,22 @@ You can see these Boilerplate running here:<br>
 - [**https://clementinejs-pnald-grunt.herokuapp.com**](https://clementinejs-pnald-grunt.herokuapp.com)
 
 - GRUNT Ready version of Clementinejs<br>
-    ---grunt or npm start to run the app in production mode<br>
-    ---grunt check-all or npm test to run tests on the app<br>
-    ---grunt build to build the app<br>
-    ---All files went modifyed following good practices<br>
-    ---server.js auto run the grunt build-dev commant in development mode<br>
-    ---grunt build-check (build and check app)<br>
-    ---grunt run-dev (run only development)<br>
-    ---grunt run (run only production)<br>
-    ---grunt clean (clean app files)<br>
-    ---grunt development (build and run)<br>
-    ---grunt production (build and run)<br>
+    grunt or npm start to run the app in production mode<br>
+    grunt check-all or npm test to run tests on the app<br>
+    grunt build to build the app<br>
+    All files went modifyed following good practices<br>
+    server.js auto run the grunt build-dev commant in development mode<br>
+    grunt build-check (build and check app)<br>
+    grunt run-dev (run only development)<br>
+    grunt run (run only production)<br>
+    grunt clean (clean app files)<br>
+    grunt development (build and run)<br>
+    grunt production (build and run)<br>
 - Added NODE_ENV=development or production<br>
 - Added EXT_AUTH=TRUE to .env file to used the others authentication methods (GITHUB and TWITTER)<br>
     Default it will use only local passport authentication<br>
 - Added Socket functionality that can be activated with<br>
-    ---SOCKET=TRUE<br>
+    SOCKET=TRUE<br>
 - Added Snyk<br>
 - Added Helmet and cookie-session for production security<br>
 - Added Jquery<br>
@@ -34,8 +34,8 @@ You can see these Boilerplate running here:<br>
 - Added a controller for web socket use with socket.io<br>
 - Added urlparser<br>
 - Added TWITTER passport Authentication<br>
-     ---TWITTER_KEY=your-client-id-here<br>
-     ---TWITTER_SECRET=your-client-secret-here<br>
+     TWITTER_KEY=your-client-id-here<br>
+     TWITTER_SECRET=your-client-secret-here<br>
 - Added a sample of array manipulation inside mongodb<br>
 - Forced Cache function<br>
 - Added Compression<br>
@@ -45,10 +45,10 @@ You can see these Boilerplate running here:<br>
 - Added cookie-parser<br>
 - Added LOCAL passport Authentication<br>
 - Added emailjs for the local Auth with ssl...<br>
-    ---EMAILUSER=email<br>
-    ---EMAILPASS=password<br>
-    ---EMAILHOST=hostserver<br>
-    ---EMAILPORT=port<br>
+    EMAILUSER=email<br>
+    EMAILPASS=password<br>
+    EMAILHOST=hostserver<br>
+    EMAILPORT=port<br>
 
 Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
 
