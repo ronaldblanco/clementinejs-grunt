@@ -39,7 +39,7 @@
          if(grid != null){
             grid.innerHTML = '';
             for(var a = 0; a < info.data.length; a++){
-               grid.innerHTML = grid.innerHTML + '<li class="list-group-item '+colors1()+'"><input type="radio" value="?name=' +info.data[a].name+'" name="radioData" id="radioData'+a+'">'+info.data[a].name+'</li>';
+               grid.innerHTML = grid.innerHTML + '<li class="list-group-item '+colors1()+'"><input type="radio" value="?name=' +info.data[a].name+'" name="radioData" id="radioData'+a+'"><a href='+info.data[a].name+'>'+info.data[a].name+'</a></li>';
             }
          }
       }
