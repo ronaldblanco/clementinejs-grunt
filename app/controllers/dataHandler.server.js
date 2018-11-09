@@ -2,6 +2,7 @@
 
 //var Users = require('../models/users.js');
 //var url = require("urlparser");
+require('../config/global');
 
 function DataHandler (Users, url) {
 	'use strict';
@@ -10,7 +11,7 @@ function DataHandler (Users, url) {
 			.findOne({ 'login.id': req.user.login.id }, { '_id': false })
 			.exec(function (err, result) {
 				if (err) { throw err; }
-
+				global.globalArr = result.info.data;
 				res.json(result.info);
 			});
 	};

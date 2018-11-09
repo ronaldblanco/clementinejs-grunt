@@ -40,6 +40,25 @@ if (process.env.NODE_ENV === 'production'){
     var app = require('./express.Dev.js');
     var functions = require('./app/common/functions.server.js');
 }
+
+//Global variables/////////
+require('./app/config/global');
+///////////////////////////
+
+//AntiCaptcha///////////////////
+var AntiCaptcha = require("anticaptcha").AntiCaptcha;
+var AntiCaptchaAPI = new AntiCaptcha(process.env.ANTICAPTCHA);
+////////////////////////////////
+
+//Cron/////////////////
+var cron = require('node-cron');
+cron.schedule('*/2 * * * *', function() {
+  console.log(functions.getDateTime() + ' running a task every 15 minute using list ');
+  functions.getLinks(global.globalArr,AntiCaptchaAPI);
+  //console.log(global.globalArr);
+});
+//////////////////////
+
 /////EMAIL CONFIG////////////////////////////////////////////////////////////////////////////
 var emailServer = {
     'user' : process.env.EMAILUSER,

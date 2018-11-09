@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "start": "grunt",
+    "startdev": "grunt development",
     "test": "snyk test && grunt check-all",
     "postinstall": "grunt build",
     "heroku-postbuild": "grunt build",

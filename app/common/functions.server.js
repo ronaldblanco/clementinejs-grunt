@@ -117,4 +117,70 @@ module.exports = {
     level: process.env.NODE_ENV === 'development' ? 'debug' : 'info'
   }),
   
+  getDateTime: function() {
+    var date = new Date();
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+    var sec  = date.getSeconds();
+    sec = (sec < 10 ? "0" : "") + sec;
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
+  },
+  
+  getLinks: function(arr, antiCaptChaApi){
+    if(arr != undefined && arr != null){
+      arr.forEach(function(object){
+        console.log(object.name);
+      });
+    }
+  },
+  
+  antiCaptchaBalance: function(antiCaptChaApi){
+      if (!antiCaptChaApi.isBalanceGreaterThan(10)) {
+        // You can dispatch a warning using mailer or do whatever.
+        console.warn("Take care, you're running low on money !");
+      }
+    },
+    
+  antiCaptchaResolver: function(url,antiCaptChaApi){
+    var myUrl = url.split("?")[0];
+    var key = url.split("=")[1];
+    var taskId = antiCaptChaApi.createTask(
+      myUrl,
+      key
+      //"http://www.some-site.com", // The page where the captcha is
+      //"7Lfh6tkSBBBBBBGN68s8fAVds_Fl-HP0xQGNq1DK", // The data-site-key value
+    );
+  },
+  
+  waitResolution: function(taskId,antiCaptChaApi){
+    // Waiting for resolution and do something
+    var response = antiCaptChaApi.getTaskResult(taskId);
+    /* response example:
+     {
+    status: "ready" | "processing";
+    solution: { gRecaptchaResponse: string };
+    cost: number;
+    ip: string;
+    createTime: number;
+    endTime: number;
+    
+     * Number of workers who tried to complete your task
+     *
+     * @type {number} 
+     * @memberof IGetTaskResponse
+     
+    solveCount: number;
+ }
+    */
+    return response;
+  }
+  
 };
