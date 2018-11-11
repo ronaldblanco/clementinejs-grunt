@@ -9,7 +9,7 @@ function ClickHandler (Users) {
 			.findOne({ 'login.id': req.user.login.id }, { '_id': false })
 			.exec(function (err, result) {
 				if (err) { throw err; }
-
+				global.minutes = result.nbrClicks.clicks;
 				res.json(result.nbrClicks);
 			});
 	};

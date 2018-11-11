@@ -2,6 +2,8 @@
 
 module.exports = {
     
+    userName:"",
+    minutes:2,
     globalArr:[],
     globalLog:[]
     

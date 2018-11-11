@@ -12,6 +12,7 @@ function DataHandler (Users, url) {
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				global.globalArr = result.info.data;
+				global.userName = req.user.login.id;
 				res.json(result.info);
 			});
 	};

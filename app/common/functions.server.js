@@ -24,6 +24,204 @@ function logIt (logger, info){
 //functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
+
+function urlSubmit(url,g1,g2,request,Spooky){
+    
+    //url ="https://anti-captcha.com/recaptcha";
+    /*var requestP = request;
+    request.get(url,{},function(err, res, body){
+      if(err == null){
+          //console.log(body.search("Es necesario que revises los campos que están resaltados en color rojo, para poder enviar los datos"));
+          //console.log(body.search("Texto del anuncio"));
+          console.log(body.search("Some random form question:"));
+          console.log(body.search("Prove you are a human first!"));
+          //console.log(body);
+          //console.log(res.headers);
+          
+          
+          
+          
+          request.post(
+            url,
+            {
+              form:{
+                //txtSearch: 'something',
+                name: 'insertad',
+                btnSubmit: 'send_form',
+                method: 'POST'
+              },
+              headers: res.headers,
+              body: body,
+            },
+            function (errP, resP, bodyP){
+              if(errP == null){
+                //console.log(bodyP.search("Es necesario que revises los campos que están resaltados en color rojo"));
+                //console.log(bodyP.search("Texto del anuncio"));
+                //console.log(bodyP);
+                console.log(bodyP.search("Some random form question:"));
+                console.log(bodyP.search("Prove you are a human first!"));
+              }
+            }
+          );
+          
+          
+          
+        }
+    });*/
+    
+    
+    /////////////////////////////////////////
+    /*casper.start();
+
+casper
+  .then(function(){
+    console.log("Casper Start:");
+  })
+  .thenOpen(url)
+  .then(function(){
+    // scrape something
+    //this.echo(this.getHTML('h1#foobar'));
+  })
+  .thenClick("#send_form")
+  .then(function(){
+    // scrape something else
+    this.echo(this.getHTML('h2#foobar'));
+  })
+  .thenClick("#button2")
+  .thenOpen("http://myserver.com", {
+    method: "post",
+    data: {
+        my: 'data',
+    }
+  }, function() {
+      this.echo("data sent back to the server")
+  });
+
+casper.run();*/
+   ///////////////////////////////////// 
+   
+    
+    //First step is to open a URL
+/*spooky.start().thenOpen(url, function() {
+    console.log("URL website opened");
+});
+ 
+//Second step is to click to the Sign-in button
+spooky.then(function(){
+   this.evaluate(function(){
+      document.getElementByName("send_form").children[0].click();
+   });
+});
+
+//Wait to be redirected to the Home page, and then make a screenshot
+spooky.then(function(){
+    console.log("Make a screenshot and save it as AfterClick.png");
+    this.capture('AfterClick.png');
+});
+ 
+spooky.run();*/
+    
+    
+    
+    var spooky = new Spooky({
+        child: {
+            transport: 'http'
+        },
+        casper: {
+            logLevel: 'debug',
+            verbose: true
+        }
+    }, function (err) {
+        if (err) {
+            var e = new Error('Failed to initialize SpookyJS');
+            e.details = err;
+            throw e;
+        }
+
+        spooky.start(url);
+        spooky.then(function () {
+            this.click('input[name="send_form"]');
+            this.emit('hello', 'Hello, from ' + this.evaluate(function () {
+                return document.title;
+            }));
+            //this.click('input[name="send_form"]');
+            /*this.emit('hello Click', 'Hello Click, from ' + this.evaluate(function () {
+                return document.title;
+            }));*/
+        });
+        spooky.run();
+});
+
+spooky.on('error', function (e, stack) {
+    console.error(e);
+
+    if (stack) {
+        console.log(stack);
+    }
+});
+
+
+// Uncomment this block to see all of the things Casper has to say.
+// There are a lot.
+// He has opinions.
+spooky.on('console', function (line) {
+    console.log(line);
+});
+
+spooky.on('hello', function (greeting) {
+    console.log(greeting);
+});
+
+spooky.on('log', function (log) {
+    if (log.space === 'remote') {
+        console.log(log.message.replace(/ \- .*/, ''));
+    }
+});
+    
+    
+    
+   /* var spooky = new Spooky({
+  casper: {
+    //configure casperjs here
+    logLevel: 'debug',
+    verbose: true
+  }
+}, function (err) {
+  if(err == null){
+  // NODE CONTEXT
+  console.log('We in the Node context');
+  spooky.start(url);
+  spooky.then(function() {
+    // CASPERJS CONTEXT
+    console.log('We in the CasperJS context');
+    //this.emit('consoleWe can also emit events here.');
+    this.click('send_form');
+    //document.getElementByName("send_form").click();
+  spooky.then(function() {
+    // CASPERJS CONTEXT
+    var size = this.evaluate(function() {
+    // PAGE CONTEXT
+    console.log('....'); // DOES NOT GET PRINTED OUT
+    //__utils__.echo('We in the Page context'); // Gets printed out
+    this.capture('screenshot.png');
+    //var $selectsize = $('select#myselectlist option').size();
+      //return $selectsize;
+    });
+  });
+  });
+  
+  spooky.run();
+  }
+});  */
+    
+    
+    
+    
+  }
+
+
+
+
 module.exports = {
   
   execute: function(cmd){
@@ -134,10 +332,13 @@ module.exports = {
     return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
   },
   
-  getLinks: function(arr, antiCaptChaApi){
+  getLinks: function(arr,antiCaptChaApi,request,Spooky){
     if(arr != undefined && arr != null){
       arr.forEach(function(object){
-        console.log(object.name);
+        //console.log(object.name);
+        //this.antiCaptchaResolver(object.name,antiCaptChaApi,request); //https://anti-captcha.com/recaptcha
+        urlSubmit(object.name,1,1,request,Spooky);
+        //urlSubmit("https://anti-captcha.com/recaptcha",1,1,request);
       });
     }
   },
@@ -149,7 +350,8 @@ module.exports = {
       }
     },
     
-  antiCaptchaResolver: function(url,antiCaptChaApi){
+  antiCaptchaResolver: function(url,antiCaptChaApi,request){
+    this.antiCaptchaBalance(antiCaptChaApi);
     var myUrl = url.split("?")[0];
     var key = url.split("=")[1];
     var taskId = antiCaptChaApi.createTask(
@@ -158,6 +360,13 @@ module.exports = {
       //"http://www.some-site.com", // The page where the captcha is
       //"7Lfh6tkSBBBBBBGN68s8fAVds_Fl-HP0xQGNq1DK", // The data-site-key value
     );
+    var response = this.waitResolution(taskId,antiCaptChaApi);
+    //Final URL with captcha solution
+    var finalUrl = url; //+ "&g-recaptcha-response=" + response.solution;
+    var finalUrlG1 = "https://www.google.com/recaptcha/api2/reload?k=" + response.solution; //post
+    var finalUrlG2 = "https://www.google.com/recaptcha/api2/userverify?k=" + response.solution; //post
+    //return url + "&g-recaptcha-response=" + response.solution;
+    this.urlSubmit(finalUrl,finalUrlG1,finalUrlG2,request);
   },
   
   waitResolution: function(taskId,antiCaptChaApi){
@@ -181,6 +390,8 @@ module.exports = {
  }
     */
     return response;
-  }
+  },
+  
+  
   
 };

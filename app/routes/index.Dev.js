@@ -31,8 +31,8 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 		});
 		
 	var login = '';	
-	if (loginConfig[0] === 'noEXT_AUTH') login = '/public/loginlocal.html';
-	else login = '/public/login.html';
+	if (loginConfig[0] === 'noEXT_AUTH') {login = '/public/loginlocal.html';}
+	else {login = '/public/login.html';}
 		
 	app.route('/login')
 		.get(function (req, res) {

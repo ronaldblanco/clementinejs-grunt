@@ -49,12 +49,23 @@ require('./app/config/global');
 var AntiCaptcha = require("anticaptcha").AntiCaptcha;
 var AntiCaptchaAPI = new AntiCaptcha(process.env.ANTICAPTCHA);
 ////////////////////////////////
-
+//require('fs');
+var request = require("request");
+var Spooky = require('spooky');
+//var casper = require("phantom").create();
+/*var casper = require("casper").create({
+    pageSettings: {
+        loadImages: false,//The script is much faster when this field is set to false
+        loadPlugins: false,
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
+    }
+});*/
 //Cron/////////////////
 var cron = require('node-cron');
-cron.schedule('*/2 * * * *', function() {
-  console.log(functions.getDateTime() + ' running a task every 15 minute using list ');
-  functions.getLinks(global.globalArr,AntiCaptchaAPI);
+if (global.minutes == undefined) global.minutes = 1;
+cron.schedule('*/' + global.minutes + ' * * * *', function() {
+  console.log(functions.getDateTime() + ' running a task every ' + global.minutes + ' minute using list ');
+  functions.getLinks(global.globalArr,AntiCaptchaAPI,request,Spooky);
   //console.log(global.globalArr);
 });
 //////////////////////
