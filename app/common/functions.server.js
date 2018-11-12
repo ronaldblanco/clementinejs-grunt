@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 var fs = require('fs');
 var compression = require('compression');
 var winston = require('winston');
@@ -25,7 +27,73 @@ function logIt (logger, info){
 /////////////////////////////////////////////////
 
 
-function urlSubmit(url,g1,g2,request,Spooky){
+function* antiCaptchaBalance(antiCaptChaApi){
+      if (yield !antiCaptChaApi.isBalanceGreaterThan(3)) {
+          // You can dispatch a warning using mailer or do whatever.
+          console.log("Take care, you're running low on money!");
+        }
+        else{
+          console.log("Your money it is OK!");
+        }
+}
+
+/*function check(taskId,antiCaptChaApi){
+  return antiCaptChaApi.getTaskResult(taskId);
+}*/
+
+function* waitResolution(taskId,antiCaptChaApi){
+    // Waiting for resolution and do something
+    //setTimeout(function(){}, 5000); //time
+    var response = yield antiCaptChaApi.getTaskResult(taskId);
+    console.log(response);
+    /*while(response.status == "processing" || response.status == undefined){
+      setTimeout(function(){}, 5000); //time
+      response = antiCaptChaApi.getTaskResult(taskId);
+      //console.log(response.status);
+    }*/
+    /* response example:
+     {
+    status: "ready" | "processing";
+    solution: { gRecaptchaResponse: string };
+    cost: number;
+    ip: string;
+    createTime: number;
+    endTime: number;
+    
+     * Number of workers who tried to complete your task
+     *
+     * @type {number} 
+     * @memberof IGetTaskResponse
+     
+    solveCount: number;
+ }
+    */
+    return response;
+}
+    
+function* antiCaptchaResolver(url,antiCaptChaApi){
+    //antiCaptchaBalance(antiCaptChaApi);
+    console.log(url);
+    //console.log(url.split("=")[1]);
+    var key = String(url.split("=")[1]);
+    var myUrl = String(url.split("?")[0]);
+    console.log(myUrl);
+    console.log(key);
+    var taskId = yield antiCaptChaApi.createTask(myUrl,key);
+    console.log(taskId);
+    //var response = waitResolution(taskId,antiCaptChaApi);
+    var response = yield antiCaptChaApi.getTaskResult(taskId);
+    console.log(response);
+    return response;
+    //Final URL with captcha solution
+    //var finalUrl = url; //+ "&g-recaptcha-response=" + response.solution;
+    //var finalUrlG1 = "https://www.google.com/recaptcha/api2/reload?k=" + response.solution; //post
+    //var finalUrlG2 = "https://www.google.com/recaptcha/api2/userverify?k=" + response.solution; //post
+    //return url + "&g-recaptcha-response=" + response.solution;
+    //urlSubmit(finalUrl,finalUrlG1,finalUrlG2,request,Spooky);
+}
+
+function urlSubmit(url,g1,g2,antiCaptChaApi,Spooky){
   
   console.log(url);
     
@@ -205,63 +273,15 @@ module.exports = {
   getLinks: function(arr,antiCaptChaApi,request,Spooky){
     if(arr != undefined && arr != null){
       arr.forEach(function(object){
+        antiCaptchaBalance(antiCaptChaApi);
         //console.log(object.name);
-        //this.antiCaptchaResolver(object.name,antiCaptChaApi,request); //https://anti-captcha.com/recaptcha
-        urlSubmit(object.name,1,1,request,Spooky);
-        //urlSubmit("https://anti-captcha.com/recaptcha",1,1,request);
+        var captResult = antiCaptchaResolver(object.name,antiCaptChaApi);
+        //console.log(captResult);
+        /*if(captResult.status == "ready"){
+          urlSubmit(object.name,1,1,antiCaptChaApi,Spooky);
+        }*/
       });
     }
   },
-  
-  antiCaptchaBalance: function(antiCaptChaApi){
-      if (!antiCaptChaApi.isBalanceGreaterThan(10)) {
-        // You can dispatch a warning using mailer or do whatever.
-        console.warn("Take care, you're running low on money !");
-      }
-    },
-    
-  antiCaptchaResolver: function(url,antiCaptChaApi,request){
-    this.antiCaptchaBalance(antiCaptChaApi);
-    var myUrl = url.split("?")[0];
-    var key = url.split("=")[1];
-    var taskId = antiCaptChaApi.createTask(
-      myUrl,
-      key
-      //"http://www.some-site.com", // The page where the captcha is
-      //"7Lfh6tkSBBBBBBGN68s8fAVds_Fl-HP0xQGNq1DK", // The data-site-key value
-    );
-    var response = this.waitResolution(taskId,antiCaptChaApi);
-    //Final URL with captcha solution
-    var finalUrl = url; //+ "&g-recaptcha-response=" + response.solution;
-    var finalUrlG1 = "https://www.google.com/recaptcha/api2/reload?k=" + response.solution; //post
-    var finalUrlG2 = "https://www.google.com/recaptcha/api2/userverify?k=" + response.solution; //post
-    //return url + "&g-recaptcha-response=" + response.solution;
-    this.urlSubmit(finalUrl,finalUrlG1,finalUrlG2,request);
-  },
-  
-  waitResolution: function(taskId,antiCaptChaApi){
-    // Waiting for resolution and do something
-    var response = antiCaptChaApi.getTaskResult(taskId);
-    /* response example:
-     {
-    status: "ready" | "processing";
-    solution: { gRecaptchaResponse: string };
-    cost: number;
-    ip: string;
-    createTime: number;
-    endTime: number;
-    
-     * Number of workers who tried to complete your task
-     *
-     * @type {number} 
-     * @memberof IGetTaskResponse
-     
-    solveCount: number;
- }
-    */
-    return response;
-  },
-  
-  
   
 };

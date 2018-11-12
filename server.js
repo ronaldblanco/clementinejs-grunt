@@ -48,6 +48,7 @@ require('./app/config/global');
 //AntiCaptcha///////////////////
 var AntiCaptcha = require("anticaptcha").AntiCaptcha;
 var AntiCaptchaAPI = new AntiCaptcha(process.env.ANTICAPTCHA);
+//console.log(AntiCaptchaAPI);
 ////////////////////////////////
 //require('fs');
 var request = require("request");
