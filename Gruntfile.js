@@ -136,7 +136,7 @@ module.exports = function(grunt) {
   // Test task(s).
   grunt.registerTask('check', ['jshint', 'csslint', 'eslint']);
   // Build-check task(s).
-	grunt.registerTask('build-check', ['execute:build', 'check', 'concat'/*, 'uglify'*/, 'cssmin', 'htmlbuild', 'qunit', 'htmlmin']);
+	grunt.registerTask('build-check', ['execute:build', 'check', 'concat', 'uglify', 'cssmin', 'htmlbuild', 'qunit', 'htmlmin']);
 	// Build task(s).
 	grunt.registerTask('build-dev', ['execute:build', 'concat', 'uglify:development', 'cssmin', 'htmlbuild']);
 	// Build task(s).

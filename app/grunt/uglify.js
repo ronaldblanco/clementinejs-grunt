@@ -34,7 +34,7 @@ module.exports = {
           'dist/js/user.<%= pkg.name %>.min.js': ['<%= concat.userlocal.dest %>'],
           'dist/js/index.<%= pkg.name %>.min.js': ['<%= concat.index.dest %>'],
           //Server////////////////////////////////////
-          'server/common/functions.server.js': ['app/common/functions.server.js'],
+          //'server/common/functions.server.js': ['app/common/functions.server.js'],//ERROR if Uglify!
           'server/express.js': ['express.Pro.js'],
           'server.min.js': ['server.js'],
           'server/routes/index.js': ['app/routes/index.Pro.js'],

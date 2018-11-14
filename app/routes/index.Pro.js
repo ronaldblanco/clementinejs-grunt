@@ -7,7 +7,7 @@ var ClickHandler = require(path + '/server/controllers/clickHandler.server.js');
 var DataHandler = require(path + '/server/controllers/dataHandler.server.js');
 var UserHandler = require(path + '/server/controllers/userHandler.server.js');
 
-module.exports = function (app, passport, passportTwitter, passportLocal, emailServer, loginConfig) {
+module.exports = function (app, passport, passportTwitter, passportLocal, emailServer, loginConfig, global) {
 	
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -22,7 +22,7 @@ module.exports = function (app, passport, passportTwitter, passportLocal, emailS
 	}
 	
 	var clickHandler = new ClickHandler(Users);
-	var dataHandler = new DataHandler(Users, url);
+	var dataHandler = new DataHandler(Users, url, global);
 	var userHandler = new UserHandler(Users, emailServer, message, email);
 	
 	app.route('/')

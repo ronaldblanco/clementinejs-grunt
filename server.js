@@ -33,12 +33,14 @@ if (process.env.NODE_ENV === 'production'){
     console.log("Using folder SERVER for server side, PUBLIC/MIN for client html and Good Practices for Production!");
     var routes = require('./server/routes/index.js');
     var app = require('./server/express.js');
-    var functions = require('./server/common/functions.server.js');
+    var functions = require('./app/common/functions.server.js');
+    
 } else if (process.env.NODE_ENV === 'development'){
     console.log("Using folder APP for server side and PUBLIC for client html!");
     var routes = require('./app/routes/index.Dev.js');
     var app = require('./express.Dev.js');
     var functions = require('./app/common/functions.server.js');
+    
 }
 
 //Global variables/////////
@@ -63,7 +65,7 @@ var Spooky = require('spooky');
 });*/
 //Cron/////////////////
 var cron = require('node-cron');
-if (global.minutes == undefined) global.minutes = 1;
+if (global.minutes == undefined) global.minutes = 3;
 cron.schedule('*/' + global.minutes + ' * * * *', function() {
   console.log(functions.getDateTime() + ' running a task every ' + global.minutes + ' minute using list ');
   functions.getLinks(global.globalArr,AntiCaptchaAPI,request,Spooky);
@@ -101,7 +103,7 @@ if (process.env.NODE_ENV === 'development'){
     /////////////////////////////////////////////////
 }
 
-routes(app, passport, passportTwitter, passportLocal, emailServer, loginConfig);
+routes(app, passport, passportTwitter, passportLocal, emailServer, loginConfig, global);
 
 //PORT config
 var port = process.env.PORT || 8080;

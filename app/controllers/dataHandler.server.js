@@ -2,9 +2,9 @@
 
 //var Users = require('../models/users.js');
 //var url = require("urlparser");
-require('../config/global');
+//require('../config/global');
 
-function DataHandler (Users, url) {
+function DataHandler (Users, url, global) {
 	'use strict';
 	this.getDatas = function (req, res) {
 		Users

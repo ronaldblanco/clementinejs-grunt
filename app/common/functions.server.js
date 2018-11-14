@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+/*Do not Uglify this file*/
 
 var fs = require('fs');
 var compression = require('compression');
@@ -26,26 +27,27 @@ function logIt (logger, info){
 //functions.logIt(logger,'//////////////////STARTING LOGGER INFO////////////////////////');
 /////////////////////////////////////////////////
 
-
-function* antiCaptchaBalance(antiCaptChaApi){
-      if (yield !antiCaptChaApi.isBalanceGreaterThan(3)) {
+function antiCaptchaBalance(antiCaptChaApi){
+      if (!antiCaptChaApi.isBalanceGreaterThan(3)) {
           // You can dispatch a warning using mailer or do whatever.
           console.log("Take care, you're running low on money!");
         }
-        else{
+        else {
           console.log("Your money it is OK!");
         }
 }
 
-/*function check(taskId,antiCaptChaApi){
-  return antiCaptChaApi.getTaskResult(taskId);
-}*/
-
 function* waitResolution(taskId,antiCaptChaApi){
     // Waiting for resolution and do something
     //setTimeout(function(){}, 5000); //time
-    var response = yield antiCaptChaApi.getTaskResult(taskId);
-    console.log(response);
+    try{
+        var response = yield antiCaptChaApi.getTaskResult(taskId);
+        //console.log(yield response);
+    }
+    catch(error){
+        console.log(error);
+    }
+    //console.log(response);
     /*while(response.status == "processing" || response.status == undefined){
       setTimeout(function(){}, 5000); //time
       response = antiCaptChaApi.getTaskResult(taskId);
@@ -68,23 +70,26 @@ function* waitResolution(taskId,antiCaptChaApi){
     solveCount: number;
  }
     */
-    return response;
+    //return response;
 }
-    
-function* antiCaptchaResolver(url,antiCaptChaApi){
-    //antiCaptchaBalance(antiCaptChaApi);
-    console.log(url);
-    //console.log(url.split("=")[1]);
-    var key = String(url.split("=")[1]);
-    var myUrl = String(url.split("?")[0]);
+
+function* antiCaptchaResolver(urlG,antiCaptChaApi){
+    var key = String(urlG.split("=")[1]);
+    var myUrl = String(urlG.split("?")[0]);
     console.log(myUrl);
     console.log(key);
-    var taskId = yield antiCaptChaApi.createTask(myUrl,key);
-    console.log(taskId);
-    //var response = waitResolution(taskId,antiCaptChaApi);
-    var response = yield antiCaptChaApi.getTaskResult(taskId);
-    console.log(response);
-    return response;
+    //CHECK BALANCE///////////////////
+    antiCaptchaBalance(antiCaptChaApi);
+    ///////////////////////////////
+    try{
+        var taskId = yield antiCaptChaApi.createTask(myUrl,key);
+        //console.log(yield taskId);
+    }
+    catch(error){
+        console.log(error);
+    }
+    
+    //return taskId;
     //Final URL with captcha solution
     //var finalUrl = url; //+ "&g-recaptcha-response=" + response.solution;
     //var finalUrlG1 = "https://www.google.com/recaptcha/api2/reload?k=" + response.solution; //post
@@ -93,17 +98,20 @@ function* antiCaptchaResolver(url,antiCaptChaApi){
     //urlSubmit(finalUrl,finalUrlG1,finalUrlG2,request,Spooky);
 }
 
-function urlSubmit(url,g1,g2,antiCaptChaApi,Spooky){
+function urlSubmit(url,g1,g2,antiCaptChaApi,Spooky,grecaptcharesponse){
   
   console.log(url);
-    
+  url = String(url.split("&k=")[0]);
+  console.log(url);
+
   var spooky = new Spooky({
       child: {
         transport: 'http'
       },
       casper: {
         logLevel: 'debug',
-        verbose: true
+        verbose: true,
+        //pageSettings:{grecaptcharesponse: grecaptcharesponse}
       }
   }, function (err) {
       if (err) {
@@ -118,6 +126,17 @@ function urlSubmit(url,g1,g2,antiCaptChaApi,Spooky){
           return document.getElementsByClassName("errorText").item(0).textContent;
         }));
       });
+      spooky.then([{grecaptcharesponse: grecaptcharesponse},function(){
+        this.emit('error', grecaptcharesponse);
+        this.evaluate(function(grecaptcharesponse) {
+          document.getElementById('g-recaptcha-response').value = grecaptcharesponse;
+          //document.getElementById('Passwd').value = password;
+          //document.getElementById("gaia_loginform").submit();
+        });
+        //this.getElementById("g-recaptcha-response").value = grecaptcharesponse;//Problem!
+        //document.querySelector('textarea[name="g-recaptcha-response"]').value = grecaptcharesponse;
+        //document.getElementById("g-recaptcha-response").value = grecaptcharesponse;
+      }]);
       spooky.then(function(){
         this.emit('hello','Submiting The Form!');
         this.click('input[name="send_form"]');
@@ -273,13 +292,34 @@ module.exports = {
   getLinks: function(arr,antiCaptChaApi,request,Spooky){
     if(arr != undefined && arr != null){
       arr.forEach(function(object){
-        antiCaptchaBalance(antiCaptChaApi);
-        //console.log(object.name);
+        //antiCaptchaBalance(antiCaptChaApi);
+        console.log(object.name);
         var captResult = antiCaptchaResolver(object.name,antiCaptChaApi);
-        //console.log(captResult);
-        /*if(captResult.status == "ready"){
-          urlSubmit(object.name,1,1,antiCaptChaApi,Spooky);
-        }*/
+        console.log(captResult);
+        var urlG = "https://www.google.com/recaptcha/api2/userverify?k=" + String(object.name.split("&k=")[1]);
+        
+try{
+    let taskId = antiCaptchaResolver (urlG,antiCaptChaApi).next().value;
+        //setTimeout(function(){
+            taskId.then(function(tId) {
+                console.log(tId);
+                let result = waitResolution(tId,antiCaptChaApi).next().value;
+                //setTimeout(function(){
+                    result.then(function(res){
+                        console.log(res);
+                        console.log(String(res.solution.gRecaptchaResponse));
+                        urlSubmit(object.name,1,1,antiCaptChaApi,Spooky,String(res.solution.gRecaptchaResponse));
+                    });
+                //}, 0000); //time
+            });
+        //}, 0000); //time
+}
+catch(error){
+    console.log(error);
+}
+        
+
+        
       });
     }
   },
